@@ -3,8 +3,12 @@
  * Status Manager
  */
 
+// Setup files and modules
+const axios = require('axios')
+const config = require('../config.json')
+
 // Set game status on Discord
-var setStatus = function setStatus (bot, logger, config) {
+var setStatus = function setStatus (bot, logger) {
   bot.shards.forEach(shard => {
     // Check if there is a streaming url present, if so set status to streaming
     if (config.stream_url) {
@@ -29,7 +33,7 @@ var setStatus = function setStatus (bot, logger, config) {
 }
 
 // Post status to Carbonitex and discord.pw
-var postStats = function postStats (bot, logger, config, axios) {
+var postStats = function postStats (bot, logger) {
   if (config.discord_pw_key) {
     axios({
       method: 'post',

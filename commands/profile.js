@@ -1,3 +1,9 @@
+/**
+ * Aru
+ * Profile Command
+ */
+
+// Setup files and modules
 const config = require('../config.json')
 const moment = require('moment')
 
@@ -67,75 +73,22 @@ module.exports = function (bot, logger) {
         text: bot.user.username
       }
     }
+
+    // Create message
     bot.createMessage(msg.channel.id, {
       embed: embed
     })
-    const command = `Profile (on ${User.user.username}#${User.user.discriminator})`
-    logger.commandUsed(bot, msg, command)
-  })
-  bot.registerCommand('serverinfo', msg => {
-    if (msg.channel === msg.channel.PrivateChannel) {
-      return
-    }
-    const Server = msg.guild
-    const embed = {
-      author: {
-        name: Server.name,
-        icon_url: Server.iconURL,
-        url: Server.iconURL
-      },
-      title: 'Server Information:',
-      color: 16765404,
-      fields: [
-        {
-          name: 'ID',
-          value: Server.id,
-          inline: true
-        },
-        {
-          name: 'Member Count',
-          value: Server.memberCount,
-          inline: true
-        },
-        {
-          name: 'Verification Level',
-          value: Server.verificationLevel,
-          inline: true
-        },
-        {
-          name: 'Creation Date',
-          value:
-            moment(Server.createdAt)
-              .utc()
-              .format(timeFormat) +
-            ' ' +
-            moment(Server.createdAt).fromNow(),
-          inline: true
-        },
-        {
-          name: 'AFK Channel ID',
-          value: Server.afkChannelID !== null ? Server.afkChannelID : 'None',
-          inline: true
-        },
-        {
-          name: 'Region',
-          value: Server.region,
-          inline: true
-        }
-      ],
-      thumbnail: {
-        url: Server.iconURL
-      },
-      timestamp: new Date(),
-      footer: {
-        icon_url: bot.user.avatarURL,
-        text: bot.user.username
-      }
-    }
-    bot.createMessage(msg.channel.id, {
-      embed: embed
-    })
-    const command = `Server (in ${msg.guild.name})`
-    logger.commandUsed(bot, msg, command)
+
+    // Log command usage
+    logger.info(
+      new Date() +
+        ': ' +
+        'Profile command used by ' +
+        msg.author.username +
+        '#' +
+        msg.author.discriminator +
+        ' in ' +
+        msg.channel.guild.name
+    )
   })
 }

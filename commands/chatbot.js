@@ -3,7 +3,10 @@
  * Chatbot Command
  */
 
-module.exports = function (bot, logger, axios) {
+// Setup files and modules
+const axios = require('axios')
+
+module.exports = function (bot, logger) {
   bot.registerCommand('c', (msg, args) => {
     // Make GET request
     axios

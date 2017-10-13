@@ -3,7 +3,10 @@
  * IMDB Command
  */
 
-module.exports = function (bot, logger, axios) {
+// Setup files and modules
+const axios = require('axios')
+
+module.exports = function (bot, logger) {
   bot.registerCommand('movie', (msg, args) => {
     axios
       .get(`http://www.omdbapi.com/?t=${args}&y=&plot=short&r=json`)
@@ -95,13 +98,38 @@ module.exports = function (bot, logger, axios) {
         bot.createMessage(msg.channel.id, {
           embed: embed
         })
-        const command = `Movie (to search for ${args}) - Status: Success`
-        logger.commandUsed(bot, msg, command)
+
+        // Log command usage
+        logger.info(
+          new Date() +
+            ': ' +
+            'IMDB command used by ' +
+            msg.author.username +
+            '#' +
+            msg.author.discriminator +
+            ' in ' +
+            msg.channel.guild.name +
+            ' with args ' +
+            args
+        )
       })
       .catch(error => {
+        // Create message
         bot.createMessage(msg.channel.id, 'Movie not found :slight_frown:')
-        const command = `Movie (to search for ${args}) - Status: Failed`
-        logger.commandUsed(bot, msg, command)
+        
+        // Log command usage
+        logger.info(
+          new Date() +
+            ': ' +
+            'FAILURE: IMDB command used by ' +
+            msg.author.username +
+            '#' +
+            msg.author.discriminator +
+            ' in ' +
+            msg.channel.guild.name +
+            ' with args ' +
+            args
+        )
       })
   })
 }

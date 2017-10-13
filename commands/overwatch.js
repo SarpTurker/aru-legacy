@@ -3,7 +3,10 @@
  * Overwatch Command
  */
 
-module.exports = function(bot, logger, axios) {
+// Setup files and modules
+const axios = require('axios')
+
+module.exports = function(bot, logger) {
   bot.registerCommand('ow', (msg, args) => {
     const Username = args[0].replace('#', '-')
     const Platform = args[1]
@@ -79,19 +82,43 @@ module.exports = function(bot, logger, axios) {
             text: bot.user.username
           }
         }
+
+        // Create message
         bot.createMessage(msg.channel.id, {
           embed: embed
         })
-        const command = `Overwatch (to search for ${args}) - Status: Success`
-        logger.commandUsed(bot, msg, command)
+
+        // Log command usage
+        logger.info(
+          new Date() +
+            ': ' +
+            'Overwatch command used by ' +
+            msg.author.username +
+            '#' +
+            msg.author.discriminator +
+            ' in ' +
+            msg.channel.guild.name +
+            ' with args ' +
+            args
+        )
       })
       .catch(error => {
-        bot.createMessage(
-          msg.channel.id,
-          'Overwatch profile not found :slight_frown: '
+        // Create message
+        bot.createMessage(msg.channel.id, 'Overwatch profile not found :slight_frown:')
+        
+        // Log command usage
+        logger.info(
+          new Date() +
+            ': ' +
+            'FAILURE: Overwatch command used by ' +
+            msg.author.username +
+            '#' +
+            msg.author.discriminator +
+            ' in ' +
+            msg.channel.guild.name +
+            ' with args ' +
+            args
         )
-        const command = 'Overwatch - Status: Failed'
-        logger.commandUsed(bot, msg, command)
       })
   })
 }

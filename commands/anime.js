@@ -3,7 +3,10 @@
  * Anime Command
  */
 
-module.exports = function (bot, logger, axios) {
+// Setup files and modules
+const axios = require('axios')
+
+module.exports = function (bot, logger) {
   bot.registerCommand('anime', (msg, args) => {
     axios
       .get(`https://kitsu.io/api/edge/anime?filter[text]=${args}`)
