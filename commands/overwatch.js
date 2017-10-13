@@ -12,11 +12,11 @@ module.exports = function(bot, logger) {
     const Platform = args[1]
     const Region = args[2]
     axios
-      .get(`https://api.lootbox.eu/${Platform}/${Region}/${Username}/profile`)
+      .get(`https://ow-api.com/v1/stats/${Platform}/${Region}/${Username}/complete`)
       .then(response => {
         const embed = {
           author: {
-            name: response.data.data.username,
+            name: response.data.name,
             icon_url: 'https://pbs.twimg.com/profile_images/538246909664559104/oeOj9DtM.png',
             url: `http://masteroverwatch.com/profile/${Platform}/${Region}/${Username}`
           },
@@ -26,55 +26,55 @@ module.exports = function(bot, logger) {
             {
               name: 'Level',
               value:
-                response.data.data.level != null
-                  ? response.data.data.level
+                response.data.level != null
+                  ? response.data.level
                   : '0',
               inline: true
             },
             {
               name: 'Quick Wins',
               value:
-                response.data.data.games.quick.wins != null
-                  ? response.data.data.games.quick.wins
+                response.data.quickPlayStats.games.won != null
+                  ? response.data.quickPlayStats.games.won
                   : '0',
               inline: true
             },
             {
               name: 'Competitive Wins',
               value:
-                response.data.data.competitive.wins != null
-                  ? response.data.data.competitive.wins
+                response.data.competitiveStats.games.won != null
+                  ? response.data.competitiveStats.games.won
                   : '0',
               inline: true
             },
             {
               name: 'Competitive Lost',
               value:
-                response.data.data.competitive.lost != null
-                  ? response.data.data.competitive.lost
+                response.data.competitiveStats.games.played != null
+                  ? response.data.competitiveStats.games.played - response.data.competitiveStats.games.won
                   : '0',
               inline: true
             },
             {
               name: 'Playtime (Quick)',
               value:
-                response.data.data.playtime.quick != null
-                  ? response.data.data.playtime.quick
+                response.data.quickPlayStats.careerStats.allHeroes.game.timePlayed != null
+                  ? response.data.quickPlayStats.careerStats.allHeroes.game.timePlayed
                   : '0',
               inline: true
             },
             {
               name: 'Playtime (Competitive)',
               value:
-                response.data.data.playtime.competitive != null
-                  ? response.data.data.playtime.competitive
+                response.data.competitiveStats.careerStats.allHeroes.game.timePlayed != null
+                  ? response.data.competitiveStats.careerStats.allHeroes.game.timePlayed
                   : '0',
               inline: true
             }
           ],
           thumbnail: {
             url:
-              response.data.data.avatar != null ? response.data.data.avatar : ''
+              response.data.icon != null ? response.data.icon : ''
           },
           timestamp: new Date(),
           footer: {
