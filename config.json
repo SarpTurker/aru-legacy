@@ -6,5 +6,6 @@
   "time_format": "ddd MMM DD YYYY | kk:mm:ss",
   "discord_pw_key": "",
   "carbonitex_key": "",
+  "tmdb_key": "",
   "token": ""
 }
