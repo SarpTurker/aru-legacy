@@ -25,7 +25,7 @@ module.exports = function (bot, logger) {
         **${prefix}anime animename** - Get information about an anime via kitsu.io\n
         **${prefix}manga manganame** - Get information about a manga via kitsu.io\n\n
         **IMDb Commands:**\n
-        **${prefix}movie moviename** - Get information about a movie via IMDb\n\n
+        **${prefix}movie moviename** - Get information about a movie via TMDb\n\n
         **Game Info Commands:**\n
         **${prefix}ow username platform region** - Get information from a Overwatch profile. 
         Replace username with Battletag, platform with pc, xbl, or psn, and region 
