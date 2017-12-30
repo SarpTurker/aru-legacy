@@ -21,10 +21,9 @@ module.exports = function (bot, logger) {
         **Profiler Commands:**\n
         **${prefix}profile @UserName** - Get user details\n
         **${prefix}serverinfo** - Get info about the server\n\n
-        **Anime Commands:**\n
+        **Media Info Commands:**\n
         **${prefix}anime animename** - Get information about an anime via kitsu.io\n
-        **${prefix}manga manganame** - Get information about a manga via kitsu.io\n\n
-        **IMDb Commands:**\n
+        **${prefix}manga manganame** - Get information about a manga via kitsu.io\n
         **${prefix}movie moviename** - Get information about a movie via TMDb\n\n
         **Game Info Commands:**\n
         **${prefix}ow username platform region** - Get information from a Overwatch profile. 
