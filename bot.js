@@ -5,7 +5,6 @@
 
 // Setup files and modules
 const Eris = require('eris')
-const requireDir = require('require-dir')
 const winston = require('winston')
 const config = require('./config.json')
 
