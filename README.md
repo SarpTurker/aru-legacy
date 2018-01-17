@@ -4,6 +4,7 @@
 
 # Aru
 [![Aru Support Server](https://discordapp.com/api/guilds/150660709254955009/embed.png?style=shield)](https://discord.gg/0qAx3KUU1I4X74Hc)
+
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
 Aru is a modular Discord bot powered by Eris with miscellaneous functions.
