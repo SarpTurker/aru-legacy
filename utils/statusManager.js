@@ -17,9 +17,9 @@ var setStatus = function setStatus (bot, logger) {
         type: 1,
         url: config.stream_url
       })
-      
+
       // Log status change
-      logger.info(new Date() + ': ' + 'Game status set to ' + config.game_name + ' and stream url set to ' + config.stream_url)
+      logger.info(new Date() + `: Game status set to ${config.game_name} and stream url set to ${config.stream_url}`)
     } else {
       shard.editStatus({
         name: config.game_name,
@@ -27,7 +27,7 @@ var setStatus = function setStatus (bot, logger) {
       })
 
       // Log status change
-      logger.info(new Date() + ': ' + 'Game status set to ' + config.game_name)
+      logger.info(new Date() + `: Game status set to ${config.game_name}`)
     }
   })
 }
@@ -48,7 +48,7 @@ var postStats = function postStats (bot, logger) {
     })
 
     // Log stat post
-    logger.info(new Date() + ': ' + 'Stats posted to discord.pw')
+    logger.info(new Date() + `: Stats posted to discord.pw`)
   }
 
   if (config.carbonitex_key) {
@@ -65,7 +65,7 @@ var postStats = function postStats (bot, logger) {
     })
 
     // Log stat post
-    logger.info(new Date() + ': ' + 'Stats posted to Carbonitex')
+    logger.info(new Date() + ': Stats posted to Carbonitex')
   }
 }
 

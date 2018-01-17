@@ -12,6 +12,7 @@ const timeFormat = config.time_format
 module.exports = function (bot, logger) {
   bot.registerCommand('serverinfo', msg => {
     if (msg.channel === msg.channel.PrivateChannel) {
+      bot.createMessage(msg.channel.id, 'Command is not usable in private messages.')
       return
     }
     const server = msg.guild
@@ -41,12 +42,7 @@ module.exports = function (bot, logger) {
         },
         {
           name: 'Creation Date',
-          value:
-            moment(server.createdAt)
-              .utc()
-              .format(timeFormat) +
-            ' ' +
-            moment(server.createdAt).fromNow(),
+          value: `${moment(server.createdAt).utc().format(timeFormat)} ${moment(server.createdAt).fromNow()}`,
           inline: true
         },
         {
@@ -76,15 +72,6 @@ module.exports = function (bot, logger) {
     })
 
     // Log command usage
-    logger.info(
-      new Date() +
-        ': ' +
-        'Server info command used by ' +
-        msg.author.username +
-        '#' +
-        msg.author.discriminator +
-        ' in ' +
-        msg.channel.guild.name
-    )
+    logger.info(new Date() + `: Server info command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name}`)
   })
 }

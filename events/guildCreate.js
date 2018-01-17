@@ -11,5 +11,5 @@ module.exports = function (bot, guild, logger) {
   statusManager.postStats(bot, logger)
 
   // Log event
-  logger.info(new Date() + ': ' + 'Bot has joined ' + guild.name + ' ID#' + guild.id)
+  logger.info(new Date() + `: Bot has joined ${guild.name} ID#${guild.id}`)
 }

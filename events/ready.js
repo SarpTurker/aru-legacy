@@ -10,7 +10,7 @@ const commands = requireDir('../commands')
 
 module.exports = function (bot, logger) {
   // Log start message
-  logger.info(new Date() + ': ' + 'Bot ' + 'is currently logged in as ' + bot.user.username + '#' + bot.user.discriminator + ' and ' + 'currently on ' + bot.guilds.size + ' servers and serving ' + bot.users.size + ' users')
+  logger.info(new Date() + `: Bot is currently logged in as ${bot.user.username}#${bot.user.discriminator} and currently on ${bot.guilds.size} servers and serving ${bot.users.size} users`)
 
   // Set game status
   statusManager.setStatus(bot, logger)

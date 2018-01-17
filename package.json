@@ -1,6 +1,6 @@
 {
 	"name": "aru",
-	"version": "0.0.11",
+	"version": "0.0.12",
 	"description": "A modular Discord bot powered by Eris with miscellaneous functions",
 	"author": "PyroclasticMayhem",
 	"license": "MIT",
@@ -30,7 +30,9 @@
 		"axios": "^0.17.1",
 		"moment": "^2.20.1",
 		"winston": "^2.4.0",
-		"require-dir": "^0.3.2"
+		"require-dir": "^0.3.2",
+		"node-opus": "^0.2.7",
+		"ytdl-core": "^0.18.7"
 	},
 	"devDependencies": {
 		"standard": "^10.0.3"

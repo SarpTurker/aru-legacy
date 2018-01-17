@@ -29,6 +29,6 @@ module.exports = function (bot, logger) {
     })
 
     // Log command usage
-    logger.info(new Date() + ': ' + 'Logger command used by ' + msg.author.username + '#' + msg.author.discriminator + ' in ' + msg.channel.guild.name)    
+    logger.info(new Date() + `: Logger command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name}`)
   })
 }

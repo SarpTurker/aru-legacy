@@ -23,58 +23,37 @@ module.exports = function (bot, logger) {
           fields: [
             {
               name: 'Episode Count',
-              value:
-                response.data.data[0].attributes.episodeCount != null
-                  ? response.data.data[0].attributes.episodeCount.toString()
-                  : 'None',
+              value: response.data.data[0].attributes.episodeCount != null ? response.data.data[0].attributes.episodeCount.toString() : 'None',
               inline: true
             },
             {
               name: 'Episode Length',
-              value:
-                response.data.data[0].attributes.episodeLength != null
-                  ? response.data.data[0].attributes.episodeLength.toString()
-                  : 'None',
+              value: response.data.data[0].attributes.episodeLength != null ? response.data.data[0].attributes.episodeLength.toString() : 'None',
               inline: true
             },
             {
               name: 'Started Airing',
-              value:
-                response.data.data[0].attributes.startDate != null
-                  ? response.data.data[0].attributes.startDate
-                  : 'None',
+              value: response.data.data[0].attributes.startDate != null ? response.data.data[0].attributes.startDate : 'None',
               inline: true
             },
             {
               name: 'Finished Airing',
-              value:
-                response.data.data[0].attributes.endDate != null
-                  ? response.data.data[0].attributes.endDate
-                  : 'None',
+              value: response.data.data[0].attributes.endDate != null ? response.data.data[0].attributes.endDate : 'None',
               inline: true
             },
             {
               name: 'Kitsu.io Rating',
-              value:
-                response.data.data[0].attributes.averageRating != null
-                  ? response.data.data[0].attributes.averageRating.toString()
-                  : 'None',
+              value: response.data.data[0].attributes.averageRating != null ? response.data.data[0].attributes.averageRating.toString() : 'None',
               inline: true
             },
             {
               name: 'Age Rating',
-              value:
-                response.data.data[0].attributes.ageRating != null
-                  ? response.data.data[0].attributes.ageRating
-                  : 'None',
+              value: response.data.data[0].attributes.ageRating != null ? response.data.data[0].attributes.ageRating : 'None',
               inline: true
             },
             {
               name: 'Synopsis',
-              value:
-                response.data.data[0].attributes.synopsis != null
-                  ? response.data.data[0].attributes.synopsis
-                  : 'None',
+              value: response.data.data[0].attributes.synopsis != null ? response.data.data[0].attributes.synopsis : 'None',
               inline: false
             }
           ],
@@ -94,36 +73,14 @@ module.exports = function (bot, logger) {
         })
 
         // Log command usage
-        logger.info(
-          new Date() +
-            ': ' +
-            'Anime command used by ' +
-            msg.author.username +
-            '#' +
-            msg.author.discriminator +
-            ' in ' +
-            msg.channel.guild.name +
-            ' with args ' +
-            args
-        )
+        logger.info(new Date() + `: Anime command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
       })
       .catch(error => {
         // Create message
         bot.createMessage(msg.channel.id, 'Anime not found :slight_frown:')
 
         // Log command usage
-        logger.info(
-          new Date() +
-            ': ' +
-            'FAILURE: Anime command used by ' +
-            msg.author.username +
-            '#' +
-            msg.author.discriminator +
-            ' in ' +
-            msg.channel.guild.name +
-            ' with args ' +
-            args
-        )
+        logger.info(new Date() + `: FAILURE: Anime command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} + ${error}`)
       })
   })
 }
