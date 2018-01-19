@@ -19,8 +19,12 @@ module.exports = function (bot, logger) {
         logger.info(new Date() + `: Chat command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
       })
       .catch(error => {
-        // Create message
-        bot.createMessage(msg.channel.id, 'Not feeling like talking :slight_frown: ')
+        // Test to see if user put in args
+        if (!args[0]) {
+          bot.createMessage(msg.channel.id, 'Please put in a message following `c` to chat with the bot. ')
+        } else {
+          bot.createMessage(msg.channel.id, 'Not feeling like talking :slight_frown: ')
+        }
 
         // Log command usage
         logger.info(new Date() + `: FAILURE: Chat command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} + ${error}`)
