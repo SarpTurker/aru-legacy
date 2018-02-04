@@ -1,6 +1,6 @@
 /**
  * Aru
- * Profile Command
+ * Server Info Command
  */
 
 // Setup files and modules
@@ -15,7 +15,7 @@ module.exports = function (bot, logger) {
       bot.createMessage(msg.channel.id, 'Command is not usable in private messages.')
       return
     }
-    const server = msg.channel.guild;
+    const server = msg.channel.guild
     const embed = {
       author: {
         name: server.name,
