@@ -8,13 +8,13 @@ const axios = require('axios')
 
 module.exports = function (bot, logger) {
   bot.registerCommand('ow', (msg, args) => {
-    const username = args[0].replace('#', '-')
-    const platform = args[1]
-    const region = args[2]
+    let username = args[0].replace('#', '-')
+    let platform = args[1]
+    let region = args[2]
     axios
       .get(`https://ow-api.com/v1/stats/${platform}/${region}/${username}/complete`)
       .then(response => {
-        const embed = {
+        let embed = {
           author: {
             name: response.data.name,
             icon_url: 'https://pbs.twimg.com/profile_images/538246909664559104/oeOj9DtM.png',

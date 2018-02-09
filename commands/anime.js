@@ -11,7 +11,7 @@ module.exports = function (bot, logger) {
     axios
       .get(`https://kitsu.io/api/edge/anime?filter[text]=${args}`)
       .then(response => {
-        const embed = {
+        let embed = {
           author: {
             name: response.data.data[0].attributes.titles.en,
             icon_url:

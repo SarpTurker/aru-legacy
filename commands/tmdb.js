@@ -15,7 +15,7 @@ module.exports = function (bot, logger) {
         axios
             .get(`https://api.themoviedb.org/3/movie/${response.data.results[0].id}?api_key=${config.tmdb_key}&language=en-US`)
             .then(response => {
-              const embed = {
+              let embed = {
                 author: {
                   name: response.data.original_title,
                   icon_url: 'https://www.themoviedb.org/assets/static_cache/2dceae11589334eecd61443249261daf/images/v4/logos/208x226-stacked-green.png',

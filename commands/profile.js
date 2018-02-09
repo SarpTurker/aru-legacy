@@ -14,9 +14,9 @@ module.exports = function (bot, logger) {
       return
     }
 
-    const user = msg.channel.guild.members.get(msg.mentions[0].id)
+    let user = msg.channel.guild.members.get(msg.mentions[0].id)
 
-    const embed = {
+    let embed = {
       author: {
         name: user.user.username + '#' + user.user.discriminator,
         icon_url: user.user.avatarURL,

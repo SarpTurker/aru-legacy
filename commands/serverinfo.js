@@ -15,8 +15,8 @@ module.exports = function (bot, logger) {
       bot.createMessage(msg.channel.id, 'Command is not usable in private messages.')
       return
     }
-    const server = msg.channel.guild
-    const embed = {
+    let server = msg.channel.guild
+    let embed = {
       author: {
         name: server.name,
         icon_url: server.iconURL,

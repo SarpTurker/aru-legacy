@@ -5,7 +5,7 @@
 
 module.exports = function (bot, logger) {
   bot.registerCommand('skip', (msg) => {
-    var voiceChannel = msg.member.guild.channels.get(msg.member.voiceState.channelID)
+    let voiceChannel = msg.member.guild.channels.get(msg.member.voiceState.channelID)
 
     if (!msg.member.voiceState.channelID) { // Test to see if user is not in voice channel
       bot.createMessage(msg.channel.id, 'Please join a voice channel before skipping a song!')
