@@ -17,5 +17,7 @@ module.exports = function (bot, logger) {
       bot.createMessage(msg.channel.id, msg.author.mention + ' hugged ' + users)
       logger.info(new Date() + `: Hug command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} on ${users}`) // Log command usage
     }
+  }, {
+    guildOnly: true
   })
 }

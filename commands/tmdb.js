@@ -9,6 +9,12 @@ const axios = require('axios')
 
 module.exports = function (bot, logger) {
   bot.registerCommand('movie', (msg, args) => {
+    if (!config.tmdb_key) { // See if TMDb API key is present
+      bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** TMDb API key is missing. Please contact bot maintainer.`)
+      logger.info(new Date() + `: FAILURE: TMDb command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} No API Key`)
+      return
+    }
+
     axios
       .get(`https://api.themoviedb.org/3/search/movie?api_key=${config.tmdb_key}&query=${args}`)
       .then(response => {
@@ -79,33 +85,27 @@ module.exports = function (bot, logger) {
                   text: bot.user.username
                 }
               }
-              bot.createMessage(msg.channel.id, {
-                embed: embed
-              })
+              bot.createMessage(msg.channel.id, {embed: embed})
 
               // Log command usage
-              logger.info(
-                new Date() + `: TMDb command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`
-              )
+              logger.info(new Date() + `: TMDb command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
             })
             .catch(error => {
               // Create message
-              bot.createMessage(msg.channel.id, 'An error occured while finding info on movie :slight_frown:')
+              bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** An error occured while finding info on movie :slight_frown:`)
 
               // Log command usage
-              logger.info(
-                new Date() + `: FAILURE: TMDb command (Info Query) used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} ID: ${response.data.results[0].id} and error ${error}`
-              )
+              logger.info(new Date() + `: FAILURE: TMDb command (Info Query) used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} ID: ${response.data.results[0].id} and error ${error}`)
             })
       })
       .catch(error => {
         // Create message
-        bot.createMessage(msg.channel.id, 'Movie not found :slight_frown:')
+        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** + Movie not found :slight_frown:`)
 
         // Log command usage
-        logger.info(
-          new Date() + `: FAILURE: TMDb command (ID Find) used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} and error ${error}`
-        )
+        logger.info(new Date() + `: FAILURE: TMDb command (ID Find) used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} and error ${error}`)
       })
+  }, {
+    guildOnly: true
   })
 }

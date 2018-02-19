@@ -32,12 +32,12 @@ module.exports = function (bot, logger) {
               inline: true
             },
             {
-              name: 'Started Airing',
+              name: 'Started',
               value: response.data.data[0].attributes.startDate != null ? response.data.data[0].attributes.startDate : 'None',
               inline: true
             },
             {
-              name: 'Finished Airing',
+              name: 'Finished',
               value: response.data.data[0].attributes.endDate != null ? response.data.data[0].attributes.endDate : 'None',
               inline: true
             },
@@ -68,19 +68,19 @@ module.exports = function (bot, logger) {
         }
 
         // Create message
-        bot.createMessage(msg.channel.id, {
-          embed: embed
-        })
+        bot.createMessage(msg.channel.id, {embed: embed})
 
         // Log command usage
         logger.info(new Date() + `: Manga command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
       })
       .catch(error => {
         // Create message
-        bot.createMessage(msg.channel.id, 'Manga not found :slight_frown:')
+        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Manga not found :slight_frown:`)
 
         // Log command usage
         logger.info(new Date() + `: FAILURE: Manga command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} ${error}`)
       })
+  }, {
+    guildOnly: true
   })
 }

@@ -23,12 +23,12 @@ module.exports = function (bot, logger) {
       }
     }
 
-    // Create message
-    bot.createMessage(msg.channel.id, {
-      embed: embed
-    })
+    // Create message!arut about
+    bot.createMessage(msg.channel.id, {embed: embed})
 
     // Log command usage
     logger.info(new Date() + `: Logger command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name}`)
+  }, {
+    guildOnly: true
   })
 }

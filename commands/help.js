@@ -10,7 +10,7 @@ const prefix = config.prefix
 
 module.exports = function (bot, logger) {
   bot.registerCommand('help', (msg) => {
-    bot.createMessage(msg.channel.id, ':mailbox_with_mail: Help sent to PM.')
+    bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** :mailbox_with_mail: Help sent to PM.`)
     bot.getDMChannel(msg.author.id)
     .then(channel =>
       channel.createMessage(
@@ -27,8 +27,9 @@ module.exports = function (bot, logger) {
 **${prefix}manga <manganame>** - Get information about a manga via kitsu.io\n
 **${prefix}movie <moviename>** - Get information about a movie via TMDb\n\n
 **Music Commands (Beta):**\n
-**${prefix}play youtube-url** - Play a song from Youtube\n
-**${prefix}queue** - View current song queue (Not yet implemented)\n
+**${prefix}play <youtube-url>** - Play a song from Youtube\n
+**${prefix}play search <song-name> - Search and play a song from Youtube\n
+**${prefix}queue** - View current song queue\n
 **${prefix}skip** - Skip the current song in queue\n\n
 **Game Info Commands:**\n
 **${prefix}ow username platform region** - Get information from a Overwatch profile\n 
@@ -39,8 +40,10 @@ Replace username with Battletag, platform with pc, xbl, or psn, and region with 
 **${prefix}meme <topline> <bottomline> <imageurl>*** - Generate a meme\n\n`)
     )
     .catch(function (error) {
-      bot.createMessage(msg.channel.id, 'Could not send message, check that bot has permission to PM you.')
+      bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Could not send message, check that bot has permission to PM you.`)
       logger.info(new Date() + `: FAILURE: Help command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} ${error}`)
     })
+  }, {
+    guildOnly: true
   })
 }

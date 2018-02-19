@@ -8,6 +8,11 @@ const axios = require('axios')
 
 module.exports = function (bot, logger) {
   bot.registerCommand('ow', (msg, args) => {
+    if (!msg.channel.guild) { // Check if message was sent in guild
+      bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** The bot currently only supports commands sent from a server`)
+      return
+    }
+
     let username = args[0].replace('#', '-')
     let platform = args[1]
     let region = args[2]
@@ -67,19 +72,19 @@ module.exports = function (bot, logger) {
         }
 
         // Create message
-        bot.createMessage(msg.channel.id, {
-          embed: embed
-        })
+        bot.createMessage(msg.channel.id, {embed: embed})
 
         // Log command usage
         logger.info(new Date() + `: Overwatch command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
       })
       .catch(error => {
         // Create message
-        bot.createMessage(msg.channel.id, 'Overwatch profile not found :slight_frown:')
+        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Overwatch profile not found :slight_frown:. Please make sure that the correct arguments were put in.`)
 
         // Log command usage
         logger.info(new Date() + `: FAILURE: Overwatch command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} ${error}`)
       })
+  }, {
+    guildOnly: true
   })
 }

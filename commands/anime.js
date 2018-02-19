@@ -68,19 +68,19 @@ module.exports = function (bot, logger) {
         }
 
         // Create message
-        bot.createMessage(msg.channel.id, {
-          embed: embed
-        })
+        bot.createMessage(msg.channel.id, {embed: embed})
 
         // Log command usage
         logger.info(new Date() + `: Anime command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
       })
       .catch(error => {
         // Create message
-        bot.createMessage(msg.channel.id, 'Anime not found :slight_frown:')
+        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Anime not found :slight_frown:`)
 
         // Log command usage
         logger.info(new Date() + `: FAILURE: Anime command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} + ${error}`)
       })
+  }, {
+    guildOnly: true
   })
 }

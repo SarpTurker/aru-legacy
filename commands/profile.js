@@ -64,11 +64,11 @@ module.exports = function (bot, logger) {
     }
 
     // Create message
-    bot.createMessage(msg.channel.id, {
-      embed: embed
-    })
+    bot.createMessage(msg.channel.id, {embed: embed})
 
     // Log command usage
     logger.info(new Date() + `: Profile command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} on ${user.user.username}#${user.user.discriminator}`)
+  }, {
+    guildOnly: true
   })
 }
