@@ -11,11 +11,6 @@ const timeFormat = config.time_format
 
 module.exports = function (bot, logger) {
   bot.registerCommand('serverinfo', msg => {
-    if (!msg.channel.guild) { // Check if message was sent in guild
-      bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** The bot currently only supports commands sent from a server`)
-      return
-    }
-
     let server = msg.channel.guild
     let embed = {
       author: {

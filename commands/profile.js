@@ -9,12 +9,12 @@ const moment = require('moment')
 
 module.exports = function (bot, logger) {
   bot.registerCommand('profile', msg => {
+    let user
     if (msg.mentions.length === 0) {
-      logger.info(new Date() + `: FAILURE: Profile command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name}. No user was mentioned.`)
-      return
+      user = msg.channel.guild.members.get(msg.author.id)
+    } else {
+      user = msg.channel.guild.members.get(msg.mentions[0].id)
     }
-
-    let user = msg.channel.guild.members.get(msg.mentions[0].id)
 
     let embed = {
       author: {

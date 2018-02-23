@@ -8,14 +8,22 @@ const axios = require('axios')
 
 module.exports = function (bot, logger) {
   bot.registerCommand('ow', (msg, args) => {
-    if (!msg.channel.guild) { // Check if message was sent in guild
-      bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** The bot currently only supports commands sent from a server`)
+    if (args[1] !== 'pc' && args[1] !== 'xbl' && args[1] !== 'psn') {
+      bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Please put in a valid platform: pc, xbl, psn.`)
+      logger.info(new Date() + `: FAILURE: Overwatch command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} invalid platform`)
+      return
+    }
+
+    if (args[2] !== 'eu' && args[2] !== 'kr' && args[2] !== 'us' && args[2] !== 'global' && args[2] !== 'cn') {
+      bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Please put in a valid region: eu, kr, us, global, cn.`)
+      logger.info(new Date() + `: FAILURE: Overwatch command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} invalid region`)
       return
     }
 
     let username = args[0].replace('#', '-')
     let platform = args[1]
     let region = args[2]
+
     axios
       .get(`https://ow-api.com/v1/stats/${platform}/${region}/${username}/complete`)
       .then(response => {

@@ -37,33 +37,33 @@ module.exports = function (bot, logger) {
     }
 
     ytdl.getInfo(songURL, {downloadURL: true}) // Get info about song
-    .then(function (info) {
-      let song = { // Template for song
-        title: info.title,
-        length: moment.utc(info.length_seconds * 1000).format('HH:mm:ss'),
-        requester: msg.author,
-        url: songURL
-      }
-      servers[msg.member.guild.id].queue.push(song) // Push to queue
-      bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}: ${servers[msg.member.guild.id].queue[0].title}** has been added to queue at position #${servers[msg.member.guild.id].queue.length}`)
-      logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} added to queue by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with song url ${songURL}`)
+      .then(function (info) {
+        let song = { // Template for song
+          title: info.title,
+          length: moment.utc(info.length_seconds * 1000).format('HH:mm:ss'),
+          requester: msg.author,
+          url: songURL
+        }
+        servers[msg.member.guild.id].queue.push(song) // Push to queue
+        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}: ${servers[msg.member.guild.id].queue[0].title}** has been added to queue at position #${servers[msg.member.guild.id].queue.length}`)
+        logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} added to queue by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with song url ${songURL}`)
 
-      if (!servers[msg.member.guild.id].connection && !servers[msg.member.guild.id].queue[1]) { // Play the music if it isn't already being played
-        bot.joinVoiceChannel(msg.member.voiceState.channelID) // Join the user's voice channel
-        .catch((error) => {
-          bot.createMessage(msg.channel.id, 'Error occured joining VC: ' + error.message)
-          logger.info(new Date() + `: FAILURE: Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with song url ${songURL} Error joining VC`)
-        })
-        .then((connection) => {
-          servers[msg.member.guild.id].connection = connection
-          playMusic(msg, voiceChannel)
-        })
-      }
-    })
-    .catch(function (error) {
-      bot.createMessage(msg.channel.id, 'Error occured getting information about song: ' + error.message) // Notify of error
-      logger.info(new Date() + `: FAILURE: Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with song url ${songURL} ${error} Error getting info about song`)
-    })
+        if (!servers[msg.member.guild.id].queue[1]) { // Play the music if it isn't already being played
+          bot.joinVoiceChannel(msg.member.voiceState.channelID) // Join the user's voice channel
+            .catch((error) => {
+              bot.createMessage(msg.channel.id, 'Error occured joining VC: ' + error.message)
+              logger.info(new Date() + `: FAILURE: Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with song url ${songURL} Error joining VC`)
+            })
+            .then((connection) => {
+              servers[msg.member.guild.id].connection = connection
+              playMusic(msg, voiceChannel)
+            })
+        }
+      })
+      .catch(function (error) {
+        bot.createMessage(msg.channel.id, 'Error occured getting information about song: ' + error.message) // Notify of error
+        logger.info(new Date() + `: FAILURE: Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with song url ${songURL} ${error} Error getting info about song`)
+      })
   }
 
   bot.registerCommand('play', (msg, args) => {
@@ -95,15 +95,15 @@ module.exports = function (bot, logger) {
         searchQuery += args[i] + ' '
       }
       youtube.searchVideos(searchQuery, 5)
-      .then(results => {
-        logger.info(new Date() + `: Searching - song selected ${results[0].title} Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
-        songURL = results[0].url
-        getInfo(msg, songURL, voiceChannel)
-      })
-      .catch(function (error) {
-        bot.createMessage(msg.channel.id, 'Error searching for song: ' + error.message) // Notify of error
-        logger.info(new Date() + `: FAILURE: Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} ${error} Error searching for song`)
-      })
+        .then(results => {
+          logger.info(new Date() + `: Searching - song selected ${results[0].title} Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
+          songURL = results[0].url
+          getInfo(msg, songURL, voiceChannel)
+        })
+        .catch(function (error) {
+          bot.createMessage(msg.channel.id, 'Error searching for song: ' + error.message) // Notify of error
+          logger.info(new Date() + `: FAILURE: Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} ${error} Error searching for song`)
+        })
     } else if (ytdl.validateURL(songURL)) { // Test to see if URL is valid
       getInfo(msg, songURL, voiceChannel)
     } else {
