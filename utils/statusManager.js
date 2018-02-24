@@ -67,6 +67,23 @@ const postStats = (bot, logger) => {
     // Log stat post
     logger.info(new Date() + ': Stats posted to Carbonitex')
   }
+
+  if (config.discordbots_key && config.discordbots_id) {
+    axios({
+      method: 'post',
+      url: `https://discordbots.org/api/bots/${config.discordbots_id}/stats`,
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': config.discordbots_key
+      },
+      data: {
+        'server_count': bot.guilds.size
+      }
+    })
+
+    // Log stat post
+    logger.info(new Date() + ': Stats posted to discordbots.org')
+  }
 }
 
 module.exports = {

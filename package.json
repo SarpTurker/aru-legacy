@@ -1,6 +1,6 @@
 {
 	"name": "aru",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"description": "A modular Discord bot powered by Eris with miscellaneous functions",
 	"author": "PyroclasticMayhem",
 	"license": "MIT",
@@ -27,7 +27,7 @@
 		"music"
 	],
 	"dependencies": {
-		"axios": "^0.17.1",
+		"axios": "^0.18.0",
 		"eris": "^0.8.4",
 		"moment": "^2.20.1",
 		"node-opus": "^0.2.7",
@@ -37,6 +37,6 @@
 		"ytdl-core": "^0.20.1"
 	},
 	"devDependencies": {
-		"standard": "^10.0.3"
+		"standard": "^11.0.0"
 	}
 }
