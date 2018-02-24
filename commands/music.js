@@ -21,7 +21,7 @@ module.exports = function (bot, logger) {
       logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by $${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${servers[msg.member.guild.id].queue[0].channel.guild.name} has finished`)
       servers[msg.member.guild.id].queue.shift() // Remove from queue
       if (servers[msg.member.guild.id].queue[0]) {
-        playMusic(voiceChannel)
+        playMusic(msg, voiceChannel)
       } else {
         voiceChannel.leave() // Leave voice channel
       }
