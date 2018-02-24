@@ -1,6 +1,6 @@
 {
 	"name": "aru",
-	"version": "0.0.17",
+	"version": "0.0.18",
 	"description": "A modular Discord bot powered by Eris with miscellaneous functions",
 	"author": "PyroclasticMayhem",
 	"license": "MIT",
@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"start": "node bot.js",
-		"standard": "standard || exit 0"
+		"lint": "eslint **/*.js --ignore-pattern node_modules/"
 	},
 	"keywords": [
 		"discord",
@@ -37,6 +37,11 @@
 		"ytdl-core": "^0.20.1"
 	},
 	"devDependencies": {
-		"standard": "^11.0.0"
+		"eslint": "^4.18.1",
+		"eslint-config-standard": "^11.0.0",
+		"eslint-plugin-import": "^2.9.0",
+		"eslint-plugin-node": "^6.0.1",
+		"eslint-plugin-promise": "^3.6.0",
+		"eslint-plugin-standard": "^3.0.1"
 	}
 }
