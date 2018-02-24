@@ -14,14 +14,14 @@ module.exports = function (bot, logger) {
 
   let playMusic = (msg, voiceChannel) => {
     servers[msg.member.guild.id].connection.play(ytdl(servers[msg.member.guild.id].queue[0].url, {filter: 'audioonly'})) // Play song
-    bot.createMessage(msg.channel.id, `**${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}:** Now playing **${servers[msg.member.guild.id].queue[0].title} [${servers[msg.member.guild.id].queue[0].length}]**`)
-    logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by ${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${msg.channel.guild.name} now playing`)
+    bot.createMessage(servers[msg.member.guild.id].queue[0].channel.id, `**${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}:** Now playing **${servers[msg.member.guild.id].queue[0].title} [${servers[msg.member.guild.id].queue[0].length}]**`)
+    logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by ${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${servers[msg.member.guild.id].queue[0].channel.guild.name} now playing`)
     servers[msg.member.guild.id].connection.once('end', () => {
-      bot.createMessage(msg.channel.id, `**${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}:** Finished **${servers[msg.member.guild.id].queue[0].title}**`)
-      logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by $${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${msg.channel.guild.name} has finished`)
+      bot.createMessage(servers[msg.member.guild.id].queue[0].channel.id, `**${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}:** Finished **${servers[msg.member.guild.id].queue[0].title}**`)
+      logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by $${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${servers[msg.member.guild.id].queue[0].channel.guild.name} has finished`)
       servers[msg.member.guild.id].queue.shift() // Remove from queue
       if (servers[msg.member.guild.id].queue[0]) {
-        playMusic(msg, voiceChannel)
+        playMusic(voiceChannel)
       } else {
         voiceChannel.leave() // Leave voice channel
       }
@@ -31,7 +31,6 @@ module.exports = function (bot, logger) {
   let getInfo = (msg, songURL, voiceChannel) => {
     if (!servers[msg.member.guild.id]) { // Create server and queue if it doesn't exist
       servers[msg.member.guild.id] = {
-        currentlyPlaying: false,
         queue: []
       }
     }
@@ -42,21 +41,25 @@ module.exports = function (bot, logger) {
           title: info.title,
           length: moment.utc(info.length_seconds * 1000).format('HH:mm:ss'),
           requester: msg.author,
+          channel: msg.channel,
           url: songURL
         }
         servers[msg.member.guild.id].queue.push(song) // Push to queue
-        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}: ${servers[msg.member.guild.id].queue[0].title}** has been added to queue at position #${servers[msg.member.guild.id].queue.length}`)
-        logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} added to queue by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with song url ${songURL}`)
+
+        let songAdded = servers[msg.member.guild.id].queue[servers[msg.member.guild.id].queue.length - 1]
+
+        bot.createMessage(songAdded.channel.id, `**${songAdded.requester.username}#${songAdded.requester.discriminator}: ${songAdded.title}** has been added to queue at position #${servers[msg.member.guild.id].queue.length}`)
+        logger.info(new Date() + `: Song ${songAdded.title} added to queue by ${songAdded.requester.username}#${songAdded.requester.discriminator} in ${songAdded.channel.guild.name} with song url ${songURL}`)
 
         if (!servers[msg.member.guild.id].queue[1]) { // Play the music if it isn't already being played
           bot.joinVoiceChannel(msg.member.voiceState.channelID) // Join the user's voice channel
-            .catch((error) => {
-              bot.createMessage(msg.channel.id, 'Error occured joining VC: ' + error.message)
-              logger.info(new Date() + `: FAILURE: Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with song url ${songURL} Error joining VC`)
-            })
             .then((connection) => {
               servers[msg.member.guild.id].connection = connection
               playMusic(msg, voiceChannel)
+            })
+            .catch((error) => {
+              bot.createMessage(songAdded.channel.id, 'Error occured joining VC: ' + error.message)
+              logger.info(new Date() + `: FAILURE: Play command used by ${songAdded.requester.username}#${songAdded.requester.discriminator} in ${songAdded.requester.guild.name} with song url ${songURL} Error joining VC`)
             })
         }
       })
@@ -89,12 +92,18 @@ module.exports = function (bot, logger) {
     }
 
     if (songURL === 'search') { // Search for song
+      if (!config.youtube_key) { // See if Youtube API key is present
+        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Youtube API key is missing. Please contact bot maintainer.`)
+        logger.info(new Date() + `: FAILURE: Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} No Youtube API Key`)
+        return
+      }
+
       let searchQuery = ''
       logger.info(new Date() + `: Searching - Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
       for (let i = 1; i < args.length; i++) {
         searchQuery += args[i] + ' '
       }
-      youtube.searchVideos(searchQuery, 5)
+      youtube.searchVideos(searchQuery, 1)
         .then(results => {
           logger.info(new Date() + `: Searching - song selected ${results[0].title} Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args}`)
           songURL = results[0].url
@@ -116,7 +125,7 @@ module.exports = function (bot, logger) {
 
   bot.registerCommand('skip', (msg) => {
     if (servers[msg.member.guild.id]) { // Test to see if bot is in a connection
-      if (servers[msg.member.guild.id].queue[0] && servers[msg.member.guild.id].connection) {
+      if (servers[msg.member.guild.id].queue[0]) {
         bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Now skipping **${servers[msg.member.guild.id].queue[0].title}**`) // Notify that song is being skipped
         servers[msg.member.guild.id].connection.stopPlaying() // Stop playing the song
         logger.info(new Date() + `: Skip command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name}`)
@@ -131,14 +140,14 @@ module.exports = function (bot, logger) {
 
   bot.registerCommand('queue', (msg) => {
     if (servers[msg.member.guild.id]) { // Test to see if there is a song in queue
-      if (servers[msg.member.guild.id].queue[0] && servers[msg.member.guild.id].connection) {
+      if (servers[msg.member.guild.id].queue[0]) {
         let queue = '**Songs presently in Queue:**\n'
 
         for (let i = 0; i < servers[msg.member.guild.id].queue.length; i++) {
           queue += `**${i + 1}. ${servers[msg.member.guild.id].queue[i].title} [${servers[msg.member.guild.id].queue[i].length}]** requested by **${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}**\n` // Print songs in queue
         }
 
-        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** ${queue}`)
+        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:**\n${queue}`)
         logger.info(new Date() + `: Queue command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name}`)
       }
     } else {

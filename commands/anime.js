@@ -53,7 +53,7 @@ module.exports = function (bot, logger) {
             },
             {
               name: 'Synopsis',
-              value: response.data.data[0].attributes.synopsis != null ? response.data.data[0].attributes.synopsis : 'None',
+              value: response.data.data[0].attributes.synopsis != null ? response.data.data[0].attributes.synopsis.substr(0, 1024) : 'None',
               inline: false
             }
           ],

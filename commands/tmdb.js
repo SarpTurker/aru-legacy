@@ -11,7 +11,7 @@ module.exports = function (bot, logger) {
   bot.registerCommand('movie', (msg, args) => {
     if (!config.tmdb_key) { // See if TMDb API key is present
       bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** TMDb API key is missing. Please contact bot maintainer.`)
-      logger.info(new Date() + `: FAILURE: TMDb command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} No API Key`)
+      logger.info(new Date() + `: FAILURE: TMDb command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} No TMDb API Key`)
       return
     }
 
@@ -72,7 +72,7 @@ module.exports = function (bot, logger) {
                 },
                 {
                   name: 'Plot',
-                  value: response.data.overview !== null ? response.data.overview : 'N/A',
+                  value: response.data.overview !== null ? response.data.overview.substr(0, 1024) : 'N/A',
                   inline: false
                 }
               ],
@@ -100,7 +100,7 @@ module.exports = function (bot, logger) {
       })
       .catch(error => {
         // Create message
-        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** + Movie not found :slight_frown:.`)
+        bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Movie not found :slight_frown:.`)
 
         // Log command usage
         logger.info(new Date() + `: FAILURE: TMDb command (ID Find) used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} and error ${error}`)

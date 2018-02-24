@@ -28,7 +28,7 @@ module.exports = function (bot, logger) {
 **${prefix}movie <moviename>** - Get information about a movie via TMDb\n\n
 **Music Commands:**\n
 **${prefix}play <youtube-url>** - Play a song from Youtube\n
-**${prefix}play search <song-name> - Search and play a song from Youtube\n
+**${prefix}play search <song-name>** - Search and play a song from Youtube\n
 **${prefix}queue** - View current song queue\n
 **${prefix}skip** - Skip the current song in queue\n\n
 **Game Info Commands:**\n

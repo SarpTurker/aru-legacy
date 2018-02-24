@@ -22,16 +22,6 @@ module.exports = function (bot, logger) {
           color: 16765404,
           fields: [
             {
-              name: 'Episode Count',
-              value: response.data.data[0].attributes.episodeCount != null ? response.data.data[0].attributes.episodeCount.toString() : 'None',
-              inline: true
-            },
-            {
-              name: 'Episode Length',
-              value: response.data.data[0].attributes.episodeLength != null ? response.data.data[0].attributes.episodeLength.toString() : 'None',
-              inline: true
-            },
-            {
               name: 'Started',
               value: response.data.data[0].attributes.startDate != null ? response.data.data[0].attributes.startDate : 'None',
               inline: true
@@ -53,7 +43,7 @@ module.exports = function (bot, logger) {
             },
             {
               name: 'Synopsis',
-              value: response.data.data[0].attributes.synopsis != null ? response.data.data[0].attributes.synopsis : 'None',
+              value: response.data.data[0].attributes.synopsis != null ? response.data.data[0].attributes.synopsis.substr(0, 1024) : 'None',
               inline: false
             }
           ],

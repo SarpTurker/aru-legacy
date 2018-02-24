@@ -10,7 +10,7 @@ const moment = require('moment')
 module.exports = function (bot, logger) {
   bot.registerCommand('profile', msg => {
     let user
-    if (msg.mentions.length === 0) {
+    if (msg.mentions.length === 0) { // Use mentioned user or if none use mesage's author
       user = msg.channel.guild.members.get(msg.author.id)
     } else {
       user = msg.channel.guild.members.get(msg.mentions[0].id)
