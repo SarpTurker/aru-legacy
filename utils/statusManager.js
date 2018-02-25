@@ -46,9 +46,12 @@ const postStats = (bot, logger) => {
         'server_count': bot.guilds.size
       }
     })
-
-    // Log stat post
-    logger.info(new Date() + `: Stats posted to discord.pw`)
+      .then(() => {
+        logger.info(new Date() + ': Stats posted to discord.pw')
+      })
+      .catch(error => {
+        logger.info(new Date() + ': FAILURE: Stats not posted to discord.pw' + error)
+      })
   }
 
   if (config.carbonitex_key) {
@@ -63,9 +66,12 @@ const postStats = (bot, logger) => {
         'servercount': bot.guilds.size
       }
     })
-
-    // Log stat post
-    logger.info(new Date() + ': Stats posted to Carbonitex')
+      .then(() => {
+        logger.info(new Date() + ': Stats posted to Carbonitex')
+      })
+      .catch(error => {
+        logger.info(new Date() + ': FAILURE: Stats not posted to Carbonitex' + error)
+      })
   }
 
   if (config.discordbots_key && config.discordbots_id) {
@@ -80,9 +86,12 @@ const postStats = (bot, logger) => {
         'server_count': bot.guilds.size
       }
     })
-
-    // Log stat post
-    logger.info(new Date() + ': Stats posted to discordbots.org')
+      .then(() => {
+        logger.info(new Date() + ': Stats posted to discordbots.org')
+      })
+      .catch(error => {
+        logger.info(new Date() + ': FAILURE: Stats not posted to discordbots.org' + error)
+      })
   }
 }
 
