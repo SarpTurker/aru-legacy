@@ -1,13 +1,28 @@
 {
-  "prefix": "!aru ",
-  "game_name": "",
-  "stream_url": "",
+  "bot_name": "",
+  "bot_avatar": "",
+  "prefix": "",
   "time_format": "ddd MMM DD YYYY | kk:mm:ss",
-  "discord_pw_key": "",
-  "carbonitex_key": "",
-  "discordbots_key": "",
-  "discordbots_id": "",
-  "tmdb_key": "",
-  "youtube_key": "",
-  "token": ""
+  "game_info": {
+    "game_name": "",
+    "stream_url": ""
+  },
+  "tokens": {
+    "botlist_sites": {
+      "discord_pw_key": "",
+      "carbonitex_key": "",
+      "discordbots_key": "",
+      "discordbots_id": ""
+    },
+    "information": {
+      "tmdb_key": "",
+      "youtube_key": ""
+    },
+    "discord": ""
+  },
+  "messages": {
+    "join_leave": {
+      
+    }
+  }
 }

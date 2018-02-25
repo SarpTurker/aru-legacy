@@ -50,7 +50,7 @@ const postStats = (bot, logger) => {
         logger.info(new Date() + ': Stats posted to discord.pw')
       })
       .catch(error => {
-        logger.info(new Date() + ': FAILURE: Stats not posted to discord.pw' + error)
+        logger.info(new Date() + ': FAILURE: Stats not posted to discord.pw ' + error)
       })
   }
 
@@ -70,7 +70,7 @@ const postStats = (bot, logger) => {
         logger.info(new Date() + ': Stats posted to Carbonitex')
       })
       .catch(error => {
-        logger.info(new Date() + ': FAILURE: Stats not posted to Carbonitex' + error)
+        logger.info(new Date() + ': FAILURE: Stats not posted to Carbonitex ' + error)
       })
   }
 
@@ -90,7 +90,7 @@ const postStats = (bot, logger) => {
         logger.info(new Date() + ': Stats posted to discordbots.org')
       })
       .catch(error => {
-        logger.info(new Date() + ': FAILURE: Stats not posted to discordbots.org' + error)
+        logger.info(new Date() + ': FAILURE: Stats not posted to discordbots.org ' + error)
       })
   }
 }
