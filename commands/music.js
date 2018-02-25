@@ -18,7 +18,7 @@ module.exports = function (bot, logger) {
     logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by ${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${servers[msg.member.guild.id].queue[0].channel.guild.name} now playing`)
     servers[msg.member.guild.id].connection.once('end', () => {
       bot.createMessage(servers[msg.member.guild.id].queue[0].channel.id, `**${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}:** Finished **${servers[msg.member.guild.id].queue[0].title}**`)
-      logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by $${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${servers[msg.member.guild.id].queue[0].channel.guild.name} has finished`)
+      logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by ${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${servers[msg.member.guild.id].queue[0].channel.guild.name} has finished`)
       servers[msg.member.guild.id].queue.shift() // Remove from queue
       if (servers[msg.member.guild.id].queue[0]) {
         playMusic(msg, voiceChannel)
