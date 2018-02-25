@@ -25,7 +25,7 @@ const logger = new (winston.Logger)({
 })
 
 // Setup Eris
-const bot = new Eris.CommandClient(config.token, {}, {
+const bot = new Eris.CommandClient(config.tokens.discord, {}, {
   defaultHelpCommand: false,
   prefix: config.prefix
 })

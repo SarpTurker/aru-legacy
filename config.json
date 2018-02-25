@@ -24,8 +24,8 @@
     "join_leave": {
       "guild_id": {
         "channel_id": "",
-        "join_message": "",
-        "leave_message": ""
+        "join_message": "Welcome {mention} to {guild_name}.",
+        "leave_message": "Farewell {mention}!"
       }
     }
   }
