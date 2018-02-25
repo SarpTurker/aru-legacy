@@ -7,7 +7,7 @@ const config = require('../config.json')
 const ytdl = require('ytdl-core')
 const YoutubeAPI = require('simple-youtube-api')
 const moment = require('moment')
-const youtube = new YoutubeAPI(config.youtube_key)
+const youtube = new YoutubeAPI(config.tokens.information.youtube_key)
 
 module.exports = function (bot, logger) {
   let servers = {}
@@ -92,7 +92,7 @@ module.exports = function (bot, logger) {
     }
 
     if (songURL === 'search') { // Search for song
-      if (!config.youtube_key) { // See if Youtube API key is present
+      if (!config.tokens.information.youtube_key) { // See if Youtube API key is present
         bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Youtube API key is missing. Please contact bot maintainer.`)
         logger.info(new Date() + `: FAILURE: Play command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} No Youtube API Key`)
         return

@@ -7,7 +7,13 @@ const config = require('../config.json')
 
 module.exports = function (bot, guild, member, logger) {
   if (config.messages.join_leave[guild.id]) {
-    bot.createMessage(config.messages.join_leave[guild.id].channel, config.messages.join_leave[guild.id].leave_message)
+    if (config.messages.join_leave[guild.id].channel_id && config.messages.join_leave[guild.id].leave_message) {
+      guild.channels.find((channel) => {
+        if (channel.id === config.messages.join_leave[guild.id].channel_id) {
+          bot.createMessage(config.messages.join_leave[guild.id].channel_id, config.messages.join_leave[guild.id].leave_message)
+        }
+      })
+    }
   }
 
   // Log event

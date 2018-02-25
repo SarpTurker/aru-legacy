@@ -9,17 +9,17 @@ const axios = require('axios')
 
 module.exports = function (bot, logger) {
   bot.registerCommand('movie', (msg, args) => {
-    if (!config.tmdb_key) { // See if TMDb API key is present
+    if (!config.tokens.information.tmdb_key) { // See if TMDb API key is present
       bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** TMDb API key is missing. Please contact bot maintainer.`)
       logger.info(new Date() + `: FAILURE: TMDb command used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name} with args ${args} No TMDb API Key`)
       return
     }
 
     axios
-      .get(`https://api.themoviedb.org/3/search/movie?api_key=${config.tmdb_key}&query=${args}`)
+      .get(`https://api.themoviedb.org/3/search/movie?api_key=${config.tokens.information.tmdb_key}&query=${args}`)
       .then(response => {
         axios
-          .get(`https://api.themoviedb.org/3/movie/${response.data.results[0].id}?api_key=${config.tmdb_key}&language=en-US`)
+          .get(`https://api.themoviedb.org/3/movie/${response.data.results[0].id}?api_key=${config.tokens.information.tmdb_key}&language=en-US`)
           .then(response => {
             let embed = {
               author: {

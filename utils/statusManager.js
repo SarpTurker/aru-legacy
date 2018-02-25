@@ -13,33 +13,33 @@ const setStatus = (bot, logger) => {
     // Check if there is a streaming url present, if so set status to streaming
     if (config.stream_url) {
       shard.editStatus({
-        name: config.game_name,
+        name: config.game_info.game_name,
         type: 1,
-        url: config.stream_url
+        url: config.game_info.stream_url
       })
 
       // Log status change
-      logger.info(new Date() + `: Game status set to ${config.game_name} and stream url set to ${config.stream_url}`)
+      logger.info(new Date() + `: Game status set to ${config.game_info.game_name} and stream url set to ${config.game_info.stream_url}`)
     } else {
       shard.editStatus({
-        name: config.game_name,
+        name: config.game_info.game_name,
         type: 0
       })
 
       // Log status change
-      logger.info(new Date() + `: Game status set to ${config.game_name}`)
+      logger.info(new Date() + `: Game status set to ${config.game_info.game_name}`)
     }
   })
 }
 
 // Post status to Carbonitex and discord.pw
 const postStats = (bot, logger) => {
-  if (config.discord_pw_key) {
+  if (config.tokens.botlist_sites.discord_pw_key) {
     axios({
       method: 'post',
       url: 'https://bots.discord.pw/api/bots/' + bot.user.id + '/stats',
       headers: {
-        'Authorization': config.discord_pw_key,
+        'Authorization': config.tokens.botlist_sites.discord_pw_key,
         'content-type': 'application/json'
       },
       data: {
@@ -54,7 +54,7 @@ const postStats = (bot, logger) => {
       })
   }
 
-  if (config.carbonitex_key) {
+  if (config.tokens.botlist_sites.carbonitex_key) {
     axios({
       method: 'post',
       url: 'https://www.carbonitex.net/discord/data/botdata.php',
@@ -62,7 +62,7 @@ const postStats = (bot, logger) => {
         'content-type': 'application/json'
       },
       data: {
-        'key': config.carbonitex_key,
+        'key': config.tokens.botlist_sites.carbonitex_key,
         'servercount': bot.guilds.size
       }
     })
@@ -74,13 +74,13 @@ const postStats = (bot, logger) => {
       })
   }
 
-  if (config.discordbots_key && config.discordbots_id) {
+  if (config.tokens.botlist_sites.discordbots_key && config.tokens.botlist_sites.discordbots_id) {
     axios({
       method: 'post',
-      url: `https://discordbots.org/api/bots/${config.discordbots_id}/stats`,
+      url: `https://discordbots.org/api/bots/${config.tokens.botlist_sites.discordbots_id}/stats`,
       headers: {
         'content-type': 'application/json',
-        'Authorization': config.discordbots_key
+        'Authorization': config.tokens.botlist_sites.discordbots_key
       },
       data: {
         'server_count': bot.guilds.size

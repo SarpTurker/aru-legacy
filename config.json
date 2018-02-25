@@ -22,7 +22,11 @@
   },
   "messages": {
     "join_leave": {
-      
+      "guild_id": {
+        "channel_id": "",
+        "join_message": "",
+        "leave_message": ""
+      }
     }
   }
 }
