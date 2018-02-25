@@ -37,7 +37,7 @@ const postStats = (bot, logger) => {
   if (config.tokens.botlist_sites.discord_pw_key) {
     axios({
       method: 'post',
-      url: 'https://bots.discord.pw/api/bots/' + bot.user.id + '/stats',
+      url: `https://bots.discord.pw/api/bots/${bot.user.id}/stats`,
       headers: {
         'Authorization': config.tokens.botlist_sites.discord_pw_key,
         'content-type': 'application/json'
@@ -74,10 +74,10 @@ const postStats = (bot, logger) => {
       })
   }
 
-  if (config.tokens.botlist_sites.discordbots_key && config.tokens.botlist_sites.discordbots_id) {
+  if (config.tokens.botlist_sites.discordbots_key) {
     axios({
       method: 'post',
-      url: `https://discordbots.org/api/bots/${config.tokens.botlist_sites.discordbots_id}/stats`,
+      url: `https://discordbots.org/api/bots/${bot.user.id}/stats`,
       headers: {
         'content-type': 'application/json',
         'Authorization': config.tokens.botlist_sites.discordbots_key
