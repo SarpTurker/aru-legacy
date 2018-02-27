@@ -16,6 +16,7 @@ module.exports = function (bot, logger) {
     servers[msg.member.guild.id].connection.play(ytdl(servers[msg.member.guild.id].queue[0].url, {filter: 'audioonly'})) // Play song
     bot.createMessage(servers[msg.member.guild.id].queue[0].channel.id, `**${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}:** Now playing **${servers[msg.member.guild.id].queue[0].title} [${servers[msg.member.guild.id].queue[0].length}]**`)
     logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by ${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${servers[msg.member.guild.id].queue[0].channel.guild.name} now playing`)
+
     servers[msg.member.guild.id].connection.once('end', () => {
       bot.createMessage(servers[msg.member.guild.id].queue[0].channel.id, `**${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}:** Finished **${servers[msg.member.guild.id].queue[0].title}**`)
       logger.info(new Date() + `: Song ${servers[msg.member.guild.id].queue[0].title} requested by ${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${servers[msg.member.guild.id].queue[0].channel.guild.name} has finished`)
@@ -25,6 +26,11 @@ module.exports = function (bot, logger) {
       } else {
         voiceChannel.leave() // Leave voice channel
       }
+    })
+
+    servers[msg.member.guild.id].connection.once('error', error => {
+      bot.createMessage(servers[msg.member.guild.id].queue[0].channel.id, `An error has occured ${error}. Please try replaying the song again.`)
+      logger.info(new Date() + `: FAILURE: Song ${servers[msg.member.guild.id].queue[0].title} requested by ${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator} in ${servers[msg.member.guild.id].queue[0].channel.guild.name} error ${error}`)
     })
   }
 
@@ -144,7 +150,7 @@ module.exports = function (bot, logger) {
         let queue = '**Songs presently in Queue:**\n'
 
         for (let i = 0; i < servers[msg.member.guild.id].queue.length; i++) {
-          queue += `**${i + 1}. ${servers[msg.member.guild.id].queue[i].title} [${servers[msg.member.guild.id].queue[i].length}]** requested by **${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}**\n` // Print songs in queue
+          queue += `**${i + 1}. ${servers[msg.member.guild.id].queue[i].title} [${servers[msg.member.guild.id].queue[i].length}]** requested by **${servers[msg.member.guild.id].queue[i].requester.username}#${servers[msg.member.guild.id].queue[i].requester.discriminator}**\n` // Print songs in queue
         }
 
         bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:**\n${queue}`)
