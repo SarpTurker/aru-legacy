@@ -24,7 +24,7 @@
       "guild_id": {
         "channel_id": "",
         "join_message": "Welcome {mention} to {guild_name}.",
-        "leave_message": "Farewell {mention}!"
+        "leave_message": "Farewell {name}#{discriminator}!"
       }
     }
   }
