@@ -1,6 +1,4 @@
 {
-  "bot_name": "",
-  "bot_avatar": "",
   "prefix": "",
   "time_format": "ddd MMM DD YYYY | kk:mm:ss",
   "game_info": {
@@ -24,7 +22,7 @@
       "guild_id": {
         "channel_id": "",
         "join_message": "Welcome {mention} to {guild_name}.",
-        "leave_message": "Farewell {name}#{discriminator}!"
+        "leave_message": "Farewell {username}#{discriminator}!"
       }
     }
   }

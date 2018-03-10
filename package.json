@@ -1,6 +1,6 @@
 {
 	"name": "aru",
-	"version": "0.0.19",
+	"version": "0.1.0",
 	"description": "A modular Discord bot powered by Eris with miscellaneous functions",
 	"author": "PyroclasticMayhem",
 	"license": "MIT",
@@ -28,17 +28,17 @@
 	],
 	"dependencies": {
 		"axios": "^0.18.0",
-		"eris": "^0.8.4",
-		"moment": "^2.20.1",
+		"eris": "^0.8.5",
+		"glob": "^7.1.2",
+		"moment": "^2.21.0",
 		"node-opus": "^0.2.7",
-		"require-dir": "^1.0.0",
 		"simple-youtube-api": "^5.0.1",
 		"winston": "^2.4.0",
 		"ytdl-core": "^0.20.2"
 	},
 	"devDependencies": {
-		"ajv": "^6.1.1",
-		"eslint": "^4.18.1",
+		"ajv": "^6.2.1",
+		"eslint": "^4.18.2",
 		"eslint-config-standard": "^11.0.0",
 		"eslint-plugin-import": "^2.9.0",
 		"eslint-plugin-node": "^6.0.1",

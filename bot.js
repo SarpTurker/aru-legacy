@@ -5,38 +5,32 @@
 
 // Setup files and modules
 const Eris = require('eris')
-const winston = require('winston')
+const glob = require('glob')
+const logger = require('./utils/logger.js')
+const findBetween = require('./utils/findBetween.js')
 const config = require('./config.json')
-
-const events = {
-  ready: require('./events/ready.js'),
-  guildCreate: require('./events/guildCreate.js'),
-  guildDelete: require('./events/guildDelete.js'),
-  guildMemberAdd: require('./events/guildMemberAdd.js'),
-  guildMemberRemove: require('./events/guildMemberRemove.js')
-}
-
-// Setup Winston
-const logger = new (winston.Logger)({
-  transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: 'log.log' })
-  ]
-})
 
 // Setup Eris
 const bot = new Eris.CommandClient(config.tokens.discord, {}, {
-  defaultHelpCommand: false,
-  prefix: config.prefix
+  defaultHelpCommand: false, // Disable default help command
+  prefix: config.prefix // Set prefix to the one defined in config
 })
 
-// Bot event listeners
-bot.on('error', logger.info)
-bot.on('ready', () => { events.ready(bot, logger) })
-bot.on('guildCreate', guild => { events.guildCreate(bot, guild, logger) })
-bot.on('guildDelete', guild => { events.guildDelete(bot, guild, logger) })
-bot.on('guildMemberAdd', (guild, member) => { events.guildMemberAdd(bot, guild, member, logger) })
-bot.on('guildMemberRemove', (guild, member) => { events.guildMemberRemove(bot, guild, member, logger) })
+// Attach Events
+glob('./events/*.js', (err, files) => {
+  if (err) { return logger.error(err) } // Log Error
+
+  logger.info(`${files.length} events to load`) // Log number of events
+
+  files.forEach(file => {
+    let eventFile = require(file)
+    let eventName = findBetween.findBetween(file, '/', '.') // Assign name of event
+
+    bot.on(eventName, (...args) => { // Run on event emit
+      eventFile(bot, logger, ...args) // Call event function
+    })
+  })
+})
 
 // Connect to Discord
 bot.connect()

@@ -10,9 +10,7 @@
 Aru is a modular Discord bot powered by Eris with miscellaneous functions.
 
 ## Links
-* [Add Bot to Discord](https://discordapp.com/oauth2/authorize?client_id=168080204063834112&scope=bot&permissions=0
-)
-* [Documentation](https://github.com/perhion/aru/wiki
-)
-* [Issues](https://github.com/perhion/aru/issues
-)
+* [Add Bot to Discord](https://discordapp.com/oauth2/authorize?client_id=168080204063834112&scope=bot&permissions=0)
+* [Documentation](https://github.com/perhion/aru/wiki)
+* [Issues](https://github.com/perhion/aru/issues)
+* [Support Server Invite](https://discord.gg/0qAx3KUU1I4X74Hc)

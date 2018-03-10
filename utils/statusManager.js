@@ -8,7 +8,7 @@ const axios = require('axios')
 const config = require('../config.json')
 
 // Set game status on Discord
-const setStatus = (bot, logger) => {
+function setStatus (bot, logger) {
   bot.shards.forEach(shard => {
     // Check if there is a streaming url present, if so set status to streaming
     if (config.stream_url) {
@@ -19,7 +19,7 @@ const setStatus = (bot, logger) => {
       })
 
       // Log status change
-      logger.info(new Date() + `: Game status set to ${config.game_info.game_name} and stream url set to ${config.game_info.stream_url}`)
+      logger.info(`Game status set to ${config.game_info.game_name} and stream url set to ${config.game_info.stream_url}`)
     } else {
       shard.editStatus({
         name: config.game_info.game_name,
@@ -27,13 +27,13 @@ const setStatus = (bot, logger) => {
       })
 
       // Log status change
-      logger.info(new Date() + `: Game status set to ${config.game_info.game_name}`)
+      logger.info(`Game status set to ${config.game_info.game_name}`)
     }
   })
 }
 
 // Post status to Carbonitex and discord.pw
-const postStats = (bot, logger) => {
+function postStats (bot, logger) {
   if (config.tokens.botlist_sites.discord_pw_key) {
     axios({
       method: 'post',
@@ -47,10 +47,10 @@ const postStats = (bot, logger) => {
       }
     })
       .then(() => {
-        logger.info(new Date() + ': Stats posted to discord.pw')
+        logger.info(`Stats posted to discord.pw`)
       })
-      .catch(error => {
-        logger.info(new Date() + ': FAILURE: Stats not posted to discord.pw ' + error)
+      .catch(err => {
+        logger.error(`FAILURE: Stats not posted to discord.pw ${err}`)
       })
   }
 
@@ -67,10 +67,10 @@ const postStats = (bot, logger) => {
       }
     })
       .then(() => {
-        logger.info(new Date() + ': Stats posted to Carbonitex')
+        logger.info(`Stats posted to Carbonitex`)
       })
-      .catch(error => {
-        logger.info(new Date() + ': FAILURE: Stats not posted to Carbonitex ' + error)
+      .catch(err => {
+        logger.error(`FAILURE: Stats not posted to Carbonitex ${err}`)
       })
   }
 
@@ -79,18 +79,18 @@ const postStats = (bot, logger) => {
       method: 'post',
       url: `https://discordbots.org/api/bots/${bot.user.id}/stats`,
       headers: {
-        'content-type': 'application/json',
-        'Authorization': config.tokens.botlist_sites.discordbots_key
+        'Authorization': config.tokens.botlist_sites.discordbots_key,
+        'content-type': 'application/json'
       },
       data: {
         'server_count': bot.guilds.size
       }
     })
       .then(() => {
-        logger.info(new Date() + ': Stats posted to discordbots.org')
+        logger.info(`Stats posted to discordbots.org`)
       })
-      .catch(error => {
-        logger.info(new Date() + ': FAILURE: Stats not posted to discordbots.org ' + error)
+      .catch(err => {
+        logger.error(`Stats not posted to discordbots.org ${err}`)
       })
   }
 }
