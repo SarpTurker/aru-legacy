@@ -6,6 +6,7 @@
 // Setup files and modules
 const glob = require('glob')
 const statusManager = require('../utils/statusManager.js')
+const db = require('../db/db.js')
 
 module.exports = function (bot, logger) {
   logger.info(`Bot is currently logged in as ${bot.user.username}#${bot.user.discriminator} and currently on ${bot.guilds.size} servers and serving ${bot.users.size} users`) // Log start message
@@ -24,4 +25,7 @@ module.exports = function (bot, logger) {
       bot.registerCommand(command.options.name, (msg, args) => { command.exec(bot, logger, msg, args) }, command.options) // Register command
     })
   })
+
+  // Setup DB
+  db(bot, logger)
 }

@@ -15,6 +15,13 @@ module.exports = {
     // Setup files and modules
     const axios = require('axios')
 
+    // Test to make sure user put in args
+    if (!args[0]) {
+      msg.channel.createMessage(`Please put in a anime name following \`${module.exports.options.name}\`.`)
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'No anime name')
+      return
+    }
+
     axios
       .get(`https://kitsu.io/api/edge/anime?filter[text]=${args}`)
       .then(response => {

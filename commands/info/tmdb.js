@@ -22,6 +22,13 @@ module.exports = {
       return
     }
 
+    // Test to make sure user put in args
+    if (!args[0]) {
+      msg.channel.createMessage(`Please put in a movie name following \`${module.exports.options.name}\`.`)
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'No movie name')
+      return
+    }
+
     axios
       .get(`https://api.themoviedb.org/3/search/movie?api_key=${config.tokens.information.tmdb_key}&query=${args}`)
       .then(response => {

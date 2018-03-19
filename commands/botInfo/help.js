@@ -25,7 +25,7 @@ module.exports = {
         commands += bot.commands[command].description
         commands += '\n'
       }
-      commands += `\nRun **${config.prefix} help <command name>** for more info on a specific command\n`
+      commands += `\nRun **${config.prefix}help <command name>** for more info on a specific command\n`
 
       return commands
     }
@@ -65,7 +65,7 @@ module.exports = {
             }
           })
 
-          if (!msg.channel.guild) { // Tell user PM has been sent if message was sent from guild
+          if (msg.channel.guild) { // Tell user PM has been sent if message was sent from guild
             msg.channel.createMessage(`:mailbox_with_mail: Help sent to PM.`)
           }
 

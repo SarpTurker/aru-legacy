@@ -24,7 +24,7 @@ glob('./events/*.js', (err, files) => {
 
   files.forEach(file => {
     let eventFile = require(file)
-    let eventName = findBetween.findBetween(file, '/', '.') // Assign name of event
+    let eventName = findBetween(file, '/', '.') // Assign name of event
 
     bot.on(eventName, (...args) => { // Run on event emit
       eventFile(bot, logger, ...args) // Call event function

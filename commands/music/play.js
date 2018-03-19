@@ -39,6 +39,12 @@ module.exports = {
       return
     }
 
+    if (!args[0]) { // Test to make sure user put in args
+      msg.channel.createMessage('Please put in a valid YouTube URL after the command or use the search function to find a song.')
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'No URL')
+      return
+    }
+
     if (songURL === 'search') { // Search for song
       if (!config.tokens.information.youtube_key) { // See if Youtube API key is present
         bot.createMessage(msg.channel.id, `**${msg.author.username}#${msg.author.discriminator}:** Youtube API key is missing. Please contact bot maintainer.`)

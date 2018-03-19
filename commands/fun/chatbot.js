@@ -15,6 +15,13 @@ module.exports = {
     // Setup files and modules
     const axios = require('axios')
 
+    // Test to make sure user put in args
+    if (!args[0]) {
+      msg.channel.createMessage(`Please put in a chat message following \`${module.exports.options.name}\` to chat with the bot.`)
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'No chat text')
+      return
+    }
+
     // Make GET request
     axios
       .get(`http://api.program-o.com/v2/chatbot/?bot_id=6&say=${args}&convo_id=discordaru_${msg.author.id}&format=json`)
@@ -39,12 +46,7 @@ module.exports = {
         logger.cmdUsage(module.exports.options.name, msg, args)
       })
       .catch(err => {
-        // Test to see if user put in args
-        if (!args[0]) {
-          msg.channel.createMessage('Please put in a message following `c` to chat with the bot. ')
-        } else {
-          msg.channel.createMessage('Not feeling like talking :slight_frown: ')
-        }
+        msg.channel.createMessage(`An error has occured ${err}`)
 
         logger.cmdUsageError(module.exports.options.name, msg, args, err)
       })

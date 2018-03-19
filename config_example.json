@@ -1,5 +1,6 @@
 {
   "prefix": "",
+  "port": "5000",
   "time_format": "ddd MMM DD YYYY | kk:mm:ss",
   "game_info": {
     "game_name": "",
@@ -16,14 +17,5 @@
       "youtube_key": ""
     },
     "discord": ""
-  },
-  "messages": {
-    "join_leave": {
-      "guild_id": {
-        "channel_id": "",
-        "join_message": "Welcome {mention} to {guild_name}.",
-        "leave_message": "Farewell {username}#{discriminator}!"
-      }
-    }
   }
 }

@@ -15,7 +15,7 @@ module.exports = {
     msg.channel.createMessage({
       embed: {
         color: 16765404,
-        title: 'Description:',
+        title: 'Description',
         description: 'Aru is a modular Discord bot powered by Eris with miscellaneous functions.\n\n**Github**: https://github.com/perhion/aru\n**Site**: https://perhion.com/aru',
         thumbnail: {
           url: bot.user.avatarURL

@@ -5,7 +5,8 @@
 
 // Find the betweens of two characters in a string
 // Example: ./events/error.js returns error
-function findBetween (string, firstChar, lastChar) {
+
+module.exports = (string, firstChar, lastChar) => {
   let firstCharPos = 0
   let lastCharPos = 0
 
@@ -19,8 +20,4 @@ function findBetween (string, firstChar, lastChar) {
   }
 
   return string.substr(firstCharPos + 1, lastCharPos - firstCharPos - 1) // Return the betweens of two character
-}
-
-module.exports = {
-  findBetween: findBetween
 }
