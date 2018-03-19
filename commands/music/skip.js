@@ -20,7 +20,7 @@ module.exports = {
         msg.channel.createMessage({
           embed: {
             color: 16765404,
-            title: ':musical_note: Skip',
+            title: '🎵 Skip',
             description: `Now skipping **${musicUtils.servers[msg.member.guild.id].queue[0].title}**`,
             timestamp: new Date(),
             footer: {

@@ -25,7 +25,7 @@ module.exports = {
         msg.channel.createMessage({
           embed: {
             color: 16765404,
-            title: ':musical_note: Queue',
+            title: '🎵 Queue',
             description: queue,
             timestamp: new Date(),
             footer: {

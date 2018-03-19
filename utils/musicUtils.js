@@ -10,7 +10,7 @@ function playMusic (bot, logger, msg, voiceChannel, ytdl) {
   msg.channel.createMessage({
     embed: {
       color: 16765404,
-      title: ':musical_note: Playing',
+      title: '🎵 Playing',
       description: `Now playing **${servers[msg.member.guild.id].queue[0].title} [${servers[msg.member.guild.id].queue[0].length}]** requested by **${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}**`,
       timestamp: new Date(),
       footer: {
@@ -25,7 +25,7 @@ function playMusic (bot, logger, msg, voiceChannel, ytdl) {
     msg.channel.createMessage({
       embed: {
         color: 16765404,
-        title: ':musical_note: Finished',
+        title: '🎵 Finished',
         description: `Finished **${servers[msg.member.guild.id].queue[0].title} [${servers[msg.member.guild.id].queue[0].length}]** requested by **${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}**`,
         timestamp: new Date(),
         footer: {
@@ -74,8 +74,8 @@ function getInfo (bot, logger, msg, songURL, voiceChannel, ytdl) {
       msg.channel.createMessage({
         embed: {
           color: 16765404,
-          title: ':musical_note: Added to Queue',
-          description: `**${servers[msg.member.guild.id].queue[0].title} [${servers[msg.member.guild.id].queue[0].length}]** requested by **${servers[msg.member.guild.id].queue[0].requester.username}#${servers[msg.member.guild.id].queue[0].requester.discriminator}:** has been added to queue at position #${servers[msg.member.guild.id].queue.length}`,
+          title: '🎵 Added to Queue',
+          description: `**${songAdded.title} [${songAdded.length}]** requested by **${songAdded.requester.username}#${songAdded.requester.discriminator}:** has been added to queue at position #${servers[msg.member.guild.id].queue.length}`,
           timestamp: new Date(),
           footer: {
             icon_url: bot.user.avatarURL,
