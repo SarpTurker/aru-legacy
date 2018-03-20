@@ -47,8 +47,8 @@ module.exports = {
         msg.channel.createMessage({
           embed: {
             color: 16765404,
-            title: 'Join Message Set',
-            description: `Join message has been set to ${joinMsgText} in #${msg.channel.name}`,
+            title: '📝 Join Message Set',
+            description: `Join message has been set to ${joinMsgText} in **#${msg.channel.name}**.`,
             timestamp: new Date(),
             footer: {
               icon_url: bot.user.avatarURL,
@@ -72,8 +72,8 @@ module.exports = {
         msg.channel.createMessage({
           embed: {
             color: 16765404,
-            title: 'Leave Message Set',
-            description: `Leave message has been set to ${leaveMsgText} in #${msg.channel.name}`,
+            title: '📝 Leave Message Set',
+            description: `Leave message has been set to ${leaveMsgText} in **#${msg.channel.name}**.`,
             timestamp: new Date(),
             footer: {
               icon_url: bot.user.avatarURL,
@@ -95,8 +95,8 @@ module.exports = {
       msg.channel.createMessage({
         embed: {
           color: 16765404,
-          title: 'Member Update Notification Set',
-          description: `Will log when a user changes their nickname in ${msg.channel.name}.`,
+          title: '📝 Member Update Notification Set',
+          description: `Will log when a user changes their nickname in **#${msg.channel.name}**.`,
           timestamp: new Date(),
           footer: {
             icon_url: bot.user.avatarURL,
@@ -117,8 +117,8 @@ module.exports = {
       msg.channel.createMessage({
         embed: {
           color: 16765404,
-          title: 'Member Deleted Notification Set',
-          description: `Will log when a user deletes their message in ${msg.channel.name}.`,
+          title: '📝 Member Deleted Notification Set',
+          description: `Will log when a user deletes their message in **#${msg.channel.name}**.`,
           timestamp: new Date(),
           footer: {
             icon_url: bot.user.avatarURL,
@@ -139,8 +139,8 @@ module.exports = {
       msg.channel.createMessage({
         embed: {
           color: 16765404,
-          title: 'Message Update Notification Set',
-          description: `Will log when a user edits their message in ${msg.channel.name}.`,
+          title: '📝 Message Update Notification Set',
+          description: `Will log when a user edits their message in **#${msg.channel.name}**.`,
           timestamp: new Date(),
           footer: {
             icon_url: bot.user.avatarURL,

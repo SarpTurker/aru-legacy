@@ -16,8 +16,11 @@ module.exports = function (bot, logger, message) {
             channel.createMessage({
               embed: {
                 color: 16765404,
-                title: `Message deleted by ${message.author.username}#${message.author.discriminator}`,
+                title: `📝 ${message.author.username}#${message.author.discriminator}'s Message Deleted in #${message.channel.name}`,
                 description: `${message.content}`.substr(0, 2048),
+                image: {
+                  url: message.attachments[0].url != null ? message.attachments[0].url : ''
+                },
                 timestamp: new Date(),
                 footer: {
                   icon_url: bot.user.avatarURL,

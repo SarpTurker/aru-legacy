@@ -36,7 +36,7 @@ module.exports = {
       msg.channel.createMessage({
         embed: {
           color: 16765404,
-          title: 'Join Notification Unset',
+          title: '📝 Join Notification Unset',
           description: `Join notification will no longer be displayed.`,
           timestamp: new Date(),
           footer: {
@@ -58,7 +58,7 @@ module.exports = {
       msg.channel.createMessage({
         embed: {
           color: 16765404,
-          title: 'Leave Notification Unset',
+          title: '📝 Leave Notification Unset',
           description: `Leave notification will no longer be displayed.`,
           timestamp: new Date(),
           footer: {
@@ -80,7 +80,7 @@ module.exports = {
       msg.channel.createMessage({
         embed: {
           color: 16765404,
-          title: 'Member Update Notification Unset',
+          title: '📝 Member Update Notification Unset',
           description: `Nickname changes will no longer be displayed.`,
           timestamp: new Date(),
           footer: {
@@ -102,7 +102,7 @@ module.exports = {
       msg.channel.createMessage({
         embed: {
           color: 16765404,
-          title: 'Message Delete Notification Unset',
+          title: '📝 Message Delete Notification Unset',
           description: `Message delete notifications will no longer be displayed.`,
           timestamp: new Date(),
           footer: {
@@ -124,7 +124,7 @@ module.exports = {
       msg.channel.createMessage({
         embed: {
           color: 16765404,
-          title: 'Message Edit Notification Unset',
+          title: '📝 Message Edit Notification Unset',
           description: `Message edit notifications will no longer be displayed.`,
           timestamp: new Date(),
           footer: {

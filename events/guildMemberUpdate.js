@@ -17,7 +17,7 @@ module.exports = function (bot, logger, guild, member, oldMember) {
               channel.createMessage({
                 embed: {
                   color: 16765404,
-                  title: 'Nickname Change Detected',
+                  title: '📝 Nickname Change Detected',
                   description: `**${member.user.username}#${member.user.discriminator}** has changed their nickname from **${oldMember.nick || 'No Nickname'}** to **${member.nick || 'No Nickname'}**`,
                   timestamp: new Date(),
                   footer: {
@@ -27,6 +27,19 @@ module.exports = function (bot, logger, guild, member, oldMember) {
                 }
               })
             }
+          } else if (oldMember.nick) {
+            channel.createMessage({
+              embed: {
+                color: 16765404,
+                title: '📝 Nickname Change Detected',
+                description: `**${member.user.username}#${member.user.discriminator}** has changed their nickname from **${oldMember.nick || 'No Nickname'}** to **No Nickname**`,
+                timestamp: new Date(),
+                footer: {
+                  icon_url: bot.user.avatarURL,
+                  text: bot.user.username
+                }
+              }
+            })
           }
         }
       })
