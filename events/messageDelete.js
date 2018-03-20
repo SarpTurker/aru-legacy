@@ -7,7 +7,7 @@
 const guildModel = require('../db/models/guild.js')
 
 module.exports = function (bot, logger, message) {
-  if (message.channel.guild && !message.author.bot) {
+  if (message && message.channel && message.channel.guild && message.author && !message.author.bot) {
     guildModel.findOne({ _id: message.channel.guild.id }, 'notifications', (err, server) => { // Query for notifications
       if (err) { return logger.error(err) } // Log error
       if (server.notifications.messageDeletedChannel) {
@@ -19,7 +19,7 @@ module.exports = function (bot, logger, message) {
                 title: `📝 ${message.author.username}#${message.author.discriminator}'s Message Deleted in #${message.channel.name}`,
                 description: `${message.content}`.substr(0, 2048),
                 image: {
-                  url: message.attachments[0] != null ? message.attachments[0].url : ''
+                  url: message.attachments[0] ? message.attachments[0].url : ''
                 },
                 timestamp: new Date(),
                 footer: {

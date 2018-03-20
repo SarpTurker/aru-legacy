@@ -47,38 +47,38 @@ module.exports = {
             fields: [
               {
                 name: 'Level',
-                value: response.data.level != null ? response.data.level : '0',
+                value: response.data.level ? response.data.level : '0',
                 inline: true
               },
               {
                 name: 'Quick Wins',
-                value: response.data.quickPlayStats.games.won != null ? response.data.quickPlayStats.games.won : '0',
+                value: response.data.quickPlayStats.games.won ? response.data.quickPlayStats.games.won : '0',
                 inline: true
               },
               {
                 name: 'Competitive Wins',
-                value: response.data.competitiveStats.games.won != null ? response.data.competitiveStats.games.won : '0',
+                value: response.data.competitiveStats.games.won ? response.data.competitiveStats.games.won : '0',
                 inline: true
               },
               {
                 name: 'Competitive Lost',
-                value: response.data.competitiveStats.games.played != null ? response.data.competitiveStats.games.played - response.data.competitiveStats.games.won : '0',
+                value: response.data.competitiveStats.games.played ? response.data.competitiveStats.games.played - response.data.competitiveStats.games.won : '0',
                 inline: true
               },
               {
                 name: 'Playtime (Quick)',
-                value: response.data.quickPlayStats.careerStats.allHeroes.game.timePlayed != null ? response.data.quickPlayStats.careerStats.allHeroes.game.timePlayed : '0',
+                value: response.data.quickPlayStats.careerStats.allHeroes.game.timePlayed ? response.data.quickPlayStats.careerStats.allHeroes.game.timePlayed : '0',
                 inline: true
               },
               {
                 name: 'Playtime (Competitive)',
-                value: response.data.competitiveStats.careerStats.allHeroes.game.timePlayed != null ? response.data.competitiveStats.careerStats.allHeroes.game.timePlayed : '0',
+                value: response.data.competitiveStats.careerStats.allHeroes.game.timePlayed ? response.data.competitiveStats.careerStats.allHeroes.game.timePlayed : '0',
                 inline: true
               }
             ],
             thumbnail: {
               url:
-                response.data.icon != null ? response.data.icon : ''
+                response.data.icon ? response.data.icon : ''
             },
             timestamp: new Date(),
             footer: {

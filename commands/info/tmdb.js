@@ -40,59 +40,59 @@ module.exports = {
                 author: {
                   name: response.data.original_title,
                   icon_url: 'https://www.themoviedb.org/assets/static_cache/2dceae11589334eecd61443249261daf/images/v4/logos/208x226-stacked-green.png',
-                  url: response.data.homepage !== null ? response.data.homepage : ''
+                  url: response.data.homepage ? response.data.homepage : ''
                 },
                 title: 'Movie Information:',
                 color: 16765404,
                 fields: [
                   {
                     name: 'Release Date',
-                    value: response.data.release_date !== null ? response.data.release_date : 'N/A',
+                    value: response.data.release_date ? response.data.release_date : 'N/A',
                     inline: true
                   },
                   {
                     name: 'Vote Average',
-                    value: response.data.vote_average.toString() !== null ? response.data.vote_average.toString() : 'N/A',
+                    value: response.data.vote_average.toString() ? response.data.vote_average.toString() : 'N/A',
                     inline: true
                   },
                   {
                     name: 'Status',
-                    value: response.data.status !== null ? response.data.status : 'N/A',
+                    value: response.data.status ? response.data.status : 'N/A',
                     inline: true
                   },
                   {
                     name: 'Runtime',
-                    value: response.data.runtime.toString() !== null ? response.data.runtime.toString() + ' min' : 'N/A',
+                    value: response.data.runtime.toString() ? response.data.runtime.toString() + ' min' : 'N/A',
                     inline: true
                   },
                   {
                     name: 'Genre',
-                    value: response.data.genres[0].name !== null ? response.data.genres[0].name : 'N/A',
+                    value: response.data.genres[0].name ? response.data.genres[0].name : 'N/A',
                     inline: true
                   },
                   {
                     name: 'Production Company',
-                    value: response.data.production_companies[0].name !== null ? response.data.production_companies[0].name : 'N/A',
+                    value: response.data.production_companies[0].name ? response.data.production_companies[0].name : 'N/A',
                     inline: true
                   },
                   {
                     name: 'Language',
-                    value: response.data.original_language !== null ? response.data.original_language : 'N/A',
+                    value: response.data.original_language ? response.data.original_language : 'N/A',
                     inline: true
                   },
                   {
                     name: 'Country',
-                    value: response.data.production_countries[0].name !== null ? response.data.production_countries[0].name : 'N/A',
+                    value: response.data.production_countries[0].name ? response.data.production_countries[0].name : 'N/A',
                     inline: true
                   },
                   {
                     name: 'Plot',
-                    value: response.data.overview !== null ? response.data.overview.substr(0, 1024) : 'N/A',
+                    value: response.data.overview ? response.data.overview.substr(0, 1024) : 'N/A',
                     inline: false
                   }
                 ],
                 thumbnail: {
-                  url: response.data.poster_path !== null ? 'https://image.tmdb.org/t/p/w500' + response.data.poster_path : 'https://www.themoviedb.org/assets/static_cache/2dceae11589334eecd61443249261daf/images/v4/logos/208x226-stacked-green.png'
+                  url: response.data.poster_path ? 'https://image.tmdb.org/t/p/w500' + response.data.poster_path : 'https://www.themoviedb.org/assets/static_cache/2dceae11589334eecd61443249261daf/images/v4/logos/208x226-stacked-green.png'
                 },
                 timestamp: new Date(),
                 footer: {
