@@ -9,7 +9,7 @@ const guildModel = require('../db/models/guild.js')
 module.exports = function (bot, logger, guild, member, oldMember) {
   guildModel.findOne({ _id: guild.id }, 'notifications', (err, server) => { // Query for notifications
     if (err) { return logger.error(err) } // Log error
-    if (server.notifications.guildMemberUpdateChannel) {
+    if (server && server.notifications && server.notifications.guildMemberUpdateChannel) {
       guild.channels.find((channel) => {
         if (channel.id === server.notifications.guildMemberUpdateChannel) {
           if (member.nick) {
