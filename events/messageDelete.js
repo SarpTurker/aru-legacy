@@ -19,7 +19,7 @@ module.exports = function (bot, logger, message) {
                 title: `📝 ${message.author.username}#${message.author.discriminator}'s Message Deleted in #${message.channel.name}`,
                 description: `${message.content}`.substr(0, 2048),
                 image: {
-                  url: message.attachments[0].url != null ? message.attachments[0].url : ''
+                  url: message.attachments[0] != null ? message.attachments[0].url : ''
                 },
                 timestamp: new Date(),
                 footer: {
