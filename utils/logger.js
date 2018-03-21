@@ -7,7 +7,13 @@
 const winston = require('winston')
 
 // Setup Winston
-const logger = new (winston.Logger)({
+const logger = new winston.createLogger({ // eslint-disable-line new-cap
+  format: winston.format.combine(
+    winston.format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss'
+    }),
+    winston.format.simple()
+  ),
   transports: [
     new (winston.transports.Console)({ timestamp: true }), // Log to console
     new (winston.transports.File)({ filename: 'log.log', timestamp: true }) // Log to file
