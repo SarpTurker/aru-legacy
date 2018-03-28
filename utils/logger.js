@@ -17,7 +17,8 @@ const logger = new winston.createLogger({ // eslint-disable-line new-cap
   transports: [
     new (winston.transports.Console)({ timestamp: true }), // Log to console
     new (winston.transports.File)({ filename: 'log.log', timestamp: true }) // Log to file
-  ]
+  ],
+  exitOnError: false
 })
 
 function info (args) {
