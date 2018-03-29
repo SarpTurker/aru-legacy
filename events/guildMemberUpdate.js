@@ -27,7 +27,7 @@ module.exports = function (bot, logger, guild, member, oldMember) {
                 }
               })
             }
-          } else if (oldMember.nick) {
+          } else if (oldMember && oldMember.nick) {
             channel.createMessage({
               embed: {
                 color: 16765404,
