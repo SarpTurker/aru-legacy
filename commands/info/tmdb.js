@@ -102,16 +102,16 @@ module.exports = {
               }
             })
 
-            logger.cmdUsage(module.module.exports.options.name, msg, args)
+            logger.cmdUsage(module.exports.options.name, msg, args)
           })
           .catch(err => {
             msg.channel.createMessage(`An error occured while finding info on movie :slight_frown:.`)
-            logger.cmdUsageError(module.module.exports.options.name, msg, args, err)
+            logger.cmdUsageError(module.exports.options.name, msg, args, err)
           })
       })
       .catch(err => {
         msg.channel.createMessage(`Movie not found :slight_frown:.`)
-        logger.cmdUsageError(module.module.exports.options.name, msg, args, err)
+        logger.cmdUsageError(module.exports.options.name, msg, args, err)
       })
   }
 }
