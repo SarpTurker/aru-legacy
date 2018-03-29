@@ -7,6 +7,7 @@
 const glob = require('glob')
 const statusManager = require('../utils/statusManager.js')
 const db = require('../db/db.js')
+const api = require('../api/api.js')
 
 module.exports = function (bot, logger) {
   logger.info(`Bot is currently logged in as ${bot.user.username}#${bot.user.discriminator} and currently on ${bot.guilds.size} servers and serving ${bot.users.size} users`) // Log start message
@@ -28,4 +29,7 @@ module.exports = function (bot, logger) {
 
   // Setup DB
   db(bot, logger)
+
+  // Start express server
+  api(bot, logger)
 }
