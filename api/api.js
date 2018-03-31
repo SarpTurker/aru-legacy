@@ -13,5 +13,5 @@ module.exports = function (bot, logger) {
   app.get('/', (req, res) => res.send('Hello World!'))
 
   // Listen
-  app.listen(5000, () => logger.info(`Listening on port ${config.port}`))
+  app.listen(config.port, () => logger.info(`Listening on port ${config.port}`))
 }
