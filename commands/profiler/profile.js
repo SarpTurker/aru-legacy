@@ -13,14 +13,14 @@ module.exports = {
 
   exec: function (bot, logger, msg, args) {
     // Setup files and modules
-    const config = require('../../config.json')
-    const moment = require('moment')
+    const config = require('../../config.json');
+    const moment = require('moment');
 
-    let user
+    let user;
     if (msg.mentions.length === 0) { // Use mentioned user or if none use mesage's author
-      user = msg.channel.guild.members.get(msg.author.id)
+      user = msg.channel.guild.members.get(msg.author.id);
     } else {
-      user = msg.channel.guild.members.get(msg.mentions[0].id)
+      user = msg.channel.guild.members.get(msg.mentions[0].id);
     }
 
     msg.channel.createMessage({
@@ -70,8 +70,8 @@ module.exports = {
           text: bot.user.username
         }
       }
-    })
+    });
 
-    logger.cmdUsage(module.exports.options.name, msg, args)
+    logger.cmdUsage(module.exports.options.name, msg, args);
   }
-}
+};

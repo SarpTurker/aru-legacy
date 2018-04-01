@@ -13,23 +13,23 @@ module.exports = {
 
   exec: function (bot, logger, msg, args) {
     // Setup files and modules
-    const axios = require('axios')
+    const axios = require('axios');
 
     if (args[1] !== 'pc' && args[1] !== 'xbl' && args[1] !== 'psn') {
-      msg.channel.createMessage(`Please put in a valid platform: pc, xbl, psn.`)
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'Invalid platform')
-      return
+      msg.channel.createMessage(`Please put in a valid platform: pc, xbl, psn.`);
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'Invalid platform');
+      return;
     }
 
     if (args[2] !== 'eu' && args[2] !== 'kr' && args[2] !== 'us' && args[2] !== 'global' && args[2] !== 'cn') {
-      msg.channel.createMessage(`Please put in a valid region: eu, kr, us, global, cn.`)
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'Invalid region')
-      return
+      msg.channel.createMessage(`Please put in a valid region: eu, kr, us, global, cn.`);
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'Invalid region');
+      return;
     }
 
-    let username = args[0].replace('#', '-')
-    let platform = args[1]
-    let region = args[2]
+    let username = args[0].replace('#', '-');
+    let platform = args[1];
+    let region = args[2];
 
     axios
       .get(`https://ow-api.com/v1/stats/${platform}/${region}/${username}/complete`)
@@ -86,13 +86,13 @@ module.exports = {
               text: bot.user.username
             }
           }
-        })
+        });
 
-        logger.cmdUsage(module.exports.options.name, msg, args)
+        logger.cmdUsage(module.exports.options.name, msg, args);
       })
       .catch(err => {
-        msg.channel.createMessage(`Overwatch profile :slight_frown:`)
-        logger.cmdUsageError(module.exports.options.name, msg, args, err)
-      })
+        msg.channel.createMessage(`Overwatch profile :slight_frown:`);
+        logger.cmdUsageError(module.exports.options.name, msg, args, err);
+      });
   }
-}
+};

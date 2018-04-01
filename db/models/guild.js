@@ -3,7 +3,7 @@
  * Guild Model
  */
 
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 // Create Schema and Model
 module.exports = mongoose.model('guilds', new mongoose.Schema({
@@ -20,4 +20,4 @@ module.exports = mongoose.model('guilds', new mongoose.Schema({
     messageDeletedChannel: String,
     messageUpdateChannel: String
   }
-}))
+}));

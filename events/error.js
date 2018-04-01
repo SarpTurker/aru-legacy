@@ -4,5 +4,5 @@
  */
 
 module.exports = function (bot, logger, err) {
-  logger.error(err) // Log error
-}
+  logger.error(err); // Log error
+};

@@ -20,18 +20,18 @@ module.exports = {
 
   exec: function (bot, logger, msg, args) {
     // Setup files and modules
-    const guildModel = require('../../db/models/guild.js')
+    const guildModel = require('../../db/models/guild.js');
 
     if (args[0] !== 'join' && args[0] !== 'leave' && args[0] !== 'memberupdate' && args[0] !== 'messagedelete' && args[0] !== 'messageupdate') {
-      msg.channel.createMessage(`Please put in a valid type: join, leave, memberupdate, messagedelete, messageupdate.`)
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'Invalid type')
-      return
+      msg.channel.createMessage(`Please put in a valid type: join, leave, memberupdate, messagedelete, messageupdate.`);
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'Invalid type');
+      return;
     }
 
     if (args[0] === 'join') {
       guildModel.update({ _id: msg.channel.guild.id }, { $set: {
         'notifications.joinMsgChannel': ''
-      }}, (err) => { if (err) { return logger.error(err) } })
+      }}, (err) => { if (err) { return logger.error(err); } });
 
       msg.channel.createMessage({
         embed: {
@@ -44,16 +44,16 @@ module.exports = {
             text: bot.user.username
           }
         }
-      })
+      });
 
-      logger.cmdUsage(module.exports.options.name, msg, args)
-      return
+      logger.cmdUsage(module.exports.options.name, msg, args);
+      return;
     }
 
     if (args[0] === 'leave') {
       guildModel.update({ _id: msg.channel.guild.id }, { $set: {
         'notifications.leaveMsgChannel': ''
-      }}, (err) => { if (err) { return logger.error(err) } })
+      }}, (err) => { if (err) { return logger.error(err); } });
 
       msg.channel.createMessage({
         embed: {
@@ -66,16 +66,16 @@ module.exports = {
             text: bot.user.username
           }
         }
-      })
+      });
 
-      logger.cmdUsage(module.exports.options.name, msg, args)
-      return
+      logger.cmdUsage(module.exports.options.name, msg, args);
+      return;
     }
 
     if (args[0] === 'memberupdate') {
       guildModel.update({ _id: msg.channel.guild.id }, { $set: {
         'notifications.guildMemberUpdateChannel': ''
-      }}, (err) => { if (err) { return logger.error(err) } })
+      }}, (err) => { if (err) { return logger.error(err); } });
 
       msg.channel.createMessage({
         embed: {
@@ -88,16 +88,16 @@ module.exports = {
             text: bot.user.username
           }
         }
-      })
+      });
 
-      logger.cmdUsage(module.exports.options.name, msg, args)
-      return
+      logger.cmdUsage(module.exports.options.name, msg, args);
+      return;
     }
 
     if (args[0] === 'messagedelete') {
       guildModel.update({ _id: msg.channel.guild.id }, { $set: {
         'notifications.messageDeletedChannel': ''
-      }}, (err) => { if (err) { return logger.error(err) } })
+      }}, (err) => { if (err) { return logger.error(err); } });
 
       msg.channel.createMessage({
         embed: {
@@ -110,16 +110,16 @@ module.exports = {
             text: bot.user.username
           }
         }
-      })
+      });
 
-      logger.cmdUsage(module.exports.options.name, msg, args)
-      return
+      logger.cmdUsage(module.exports.options.name, msg, args);
+      return;
     }
 
     if (args[0] === 'messageupdate') {
       guildModel.update({ _id: msg.channel.guild.id }, { $set: {
         'notifications.messageUpdateChannel': ''
-      }}, (err) => { if (err) { return logger.error(err) } })
+      }}, (err) => { if (err) { return logger.error(err); } });
 
       msg.channel.createMessage({
         embed: {
@@ -132,9 +132,9 @@ module.exports = {
             text: bot.user.username
           }
         }
-      })
+      });
 
-      logger.cmdUsage(module.exports.options.name, msg, args)
+      logger.cmdUsage(module.exports.options.name, msg, args);
     }
   }
-}
+};

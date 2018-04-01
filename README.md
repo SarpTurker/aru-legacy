@@ -5,7 +5,7 @@
 # Aru
 [![Aru Support Server](https://discordapp.com/api/guilds/150660709254955009/embed.png?style=shield)](https://discord.gg/0qAx3KUU1I4X74Hc)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6b36f823103340bbb11ec623d4162fa6)](https://www.codacy.com/app/PyroclasticMayhem/aru?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=perhion/aru&amp;utm_campaign=Badge_Grade)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
 
 Aru is a modular Discord bot powered by Eris with miscellaneous functions.
 

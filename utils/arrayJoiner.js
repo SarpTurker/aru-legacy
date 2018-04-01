@@ -7,10 +7,10 @@
 // Example: ['car', 'cheese'] returns 'car cheese'
 
 module.exports = (array) => {
-  let string = ''
+  let string = '';
   for (let element of array) {
-    string += element
-    string += ' '
+    string += element;
+    string += ' ';
   }
-  return string.trim()
-}
+  return string.trim();
+};

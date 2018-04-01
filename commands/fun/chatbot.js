@@ -13,13 +13,13 @@ module.exports = {
 
   exec: function (bot, logger, msg, args) {
     // Setup files and modules
-    const axios = require('axios')
+    const axios = require('axios');
 
     // Test to make sure user put in args
     if (!args[0]) {
-      msg.channel.createMessage(`Please put in a chat message following \`${module.exports.options.name}\` to chat with the bot.`)
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'No chat text')
-      return
+      msg.channel.createMessage(`Please put in a chat message following \`${module.exports.options.name}\` to chat with the bot.`);
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'No chat text');
+      return;
     }
 
     // Make GET request
@@ -41,14 +41,14 @@ module.exports = {
               text: bot.user.username
             }
           }
-        })
+        });
 
-        logger.cmdUsage(module.exports.options.name, msg, args)
+        logger.cmdUsage(module.exports.options.name, msg, args);
       })
       .catch(err => {
-        msg.channel.createMessage(`An error has occured ${err}`)
+        msg.channel.createMessage(`An error has occured ${err}`);
 
-        logger.cmdUsageError(module.exports.options.name, msg, args, err)
-      })
+        logger.cmdUsageError(module.exports.options.name, msg, args, err);
+      });
   }
-}
+};

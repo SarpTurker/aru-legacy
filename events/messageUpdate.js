@@ -4,12 +4,12 @@
  */
 
 // Setup files and modules
-const guildModel = require('../db/models/guild.js')
+const guildModel = require('../db/models/guild.js');
 
 module.exports = function (bot, logger, message, oldMessage) {
   if (message && oldMessage && message.channel && message.channel.guild && message.embeds && message.author && !message.author.bot && message.content && oldMessage.content && message.content !== oldMessage.content) {
     guildModel.findOne({ _id: message.channel.guild.id }, 'notifications', (err, server) => { // Query for notifications
-      if (err) { return logger.error(err) } // Log error
+      if (err) { return logger.error(err); } // Log error
       if (server.notifications.messageUpdateChannel) {
         message.channel.guild.channels.find((channel) => {
           if (channel.id === server.notifications.messageUpdateChannel) {
@@ -33,10 +33,10 @@ module.exports = function (bot, logger, message, oldMessage) {
                   text: bot.user.username
                 }
               }
-            })
+            });
           }
-        })
+        });
       }
-    })
+    });
   }
-}
+};

@@ -14,8 +14,8 @@ module.exports = {
 
   exec: function (bot, logger, msg, args) {
     // Setup files and modules
-    const config = require('../../config.json')
-    const moment = require('moment')
+    const config = require('../../config.json');
+    const moment = require('moment');
 
     msg.channel.createMessage({
       embed: {
@@ -67,8 +67,8 @@ module.exports = {
           text: bot.user.username
         }
       }
-    })
+    });
 
-    logger.cmdUsage(module.exports.options.name, msg, args)
+    logger.cmdUsage(module.exports.options.name, msg, args);
   }
-}
+};

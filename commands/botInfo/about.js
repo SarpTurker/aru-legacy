@@ -26,8 +26,8 @@ module.exports = {
           text: bot.user.username
         }
       }
-    })
+    });
 
-    logger.cmdUsage(module.exports.options.name, msg, args)
+    logger.cmdUsage(module.exports.options.name, msg, args);
   }
-}
+};

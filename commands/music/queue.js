@@ -13,14 +13,14 @@ module.exports = {
   },
 
   exec: function (bot, logger, msg, args) {
-    const musicUtils = require('../../utils/musicUtils.js')
+    const musicUtils = require('../../utils/musicUtils.js');
 
     if (musicUtils.servers[msg.member.guild.id]) { // Test to see if there is a song in queue
       if (musicUtils.servers[msg.member.guild.id].queue[0]) {
-        let queue = ''
+        let queue = '';
 
         for (let i = 0; i < musicUtils.servers[msg.member.guild.id].queue.length; i++) {
-          queue += `**${i + 1}. ${musicUtils.servers[msg.member.guild.id].queue[i].title} [${musicUtils.servers[msg.member.guild.id].queue[i].length}]** requested by **${musicUtils.servers[msg.member.guild.id].queue[i].requester.username}#${musicUtils.servers[msg.member.guild.id].queue[i].requester.discriminator}**\n` // Print songs in queue
+          queue += `**${i + 1}. ${musicUtils.servers[msg.member.guild.id].queue[i].title} [${musicUtils.servers[msg.member.guild.id].queue[i].length}]** requested by **${musicUtils.servers[msg.member.guild.id].queue[i].requester.username}#${musicUtils.servers[msg.member.guild.id].queue[i].requester.discriminator}**\n`; // Print songs in queue
         }
         msg.channel.createMessage({
           embed: {
@@ -33,13 +33,13 @@ module.exports = {
               text: bot.user.username
             }
           }
-        })
+        });
 
-        logger.cmdUsage(module.exports.options.name, msg, args)
+        logger.cmdUsage(module.exports.options.name, msg, args);
       }
     } else {
-      msg.channel.createMessage('Looks like there is no song in the queue') // Notify that there is no song in the queue
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'No song in queue')
+      msg.channel.createMessage('Looks like there is no song in the queue'); // Notify that there is no song in the queue
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'No song in queue');
     }
   }
-}
+};

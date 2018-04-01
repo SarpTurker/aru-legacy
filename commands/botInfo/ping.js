@@ -12,7 +12,7 @@ module.exports = {
   },
 
   exec: function (bot, logger, msg, args) {
-    let initTime = Date.now() // Store time at run
+    let initTime = Date.now(); // Store time at run
 
     msg.channel.createMessage('Calculating...')
       .then(editedMsg => {
@@ -36,14 +36,14 @@ module.exports = {
               text: bot.user.username
             }
           }
-        })
+        });
       })
       .catch(err => {
-        msg.channel.createMessage(`An error occured: ${err}`)
+        msg.channel.createMessage(`An error occured: ${err}`);
 
-        logger.cmdUsageError(module.exports.options.name, msg, args, err)
-      })
+        logger.cmdUsageError(module.exports.options.name, msg, args, err);
+      });
 
-    logger.cmdUsage(module.exports.options.name, msg, args)
+    logger.cmdUsage(module.exports.options.name, msg, args);
   }
-}
+};

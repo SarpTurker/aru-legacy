@@ -13,20 +13,20 @@ module.exports = {
 
   exec: function (bot, logger, msg, args) {
     // Setup files and modules
-    const config = require('../../config.json')
-    const axios = require('axios')
+    const config = require('../../config.json');
+    const axios = require('axios');
 
     if (!config.tokens.information.tmdb_key) { // See if TMDb API key is present
-      msg.channel.createMessage(`TMDb API key is missing. Please contact bot maintainer.`)
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'No TMDb API key')
-      return
+      msg.channel.createMessage(`TMDb API key is missing. Please contact bot maintainer.`);
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'No TMDb API key');
+      return;
     }
 
     // Test to make sure user put in args
     if (!args[0]) {
-      msg.channel.createMessage(`Please put in a movie name following \`${module.exports.options.name}\`.`)
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'No movie name')
-      return
+      msg.channel.createMessage(`Please put in a movie name following \`${module.exports.options.name}\`.`);
+      logger.cmdUsageError(module.exports.options.name, msg, args, 'No movie name');
+      return;
     }
 
     axios
@@ -100,18 +100,18 @@ module.exports = {
                   text: bot.user.username
                 }
               }
-            })
+            });
 
-            logger.cmdUsage(module.exports.options.name, msg, args)
+            logger.cmdUsage(module.exports.options.name, msg, args);
           })
           .catch(err => {
-            msg.channel.createMessage(`An error occured while finding info on movie :slight_frown:.`)
-            logger.cmdUsageError(module.exports.options.name, msg, args, err)
-          })
+            msg.channel.createMessage(`An error occured while finding info on movie :slight_frown:.`);
+            logger.cmdUsageError(module.exports.options.name, msg, args, err);
+          });
       })
       .catch(err => {
-        msg.channel.createMessage(`Movie not found :slight_frown:.`)
-        logger.cmdUsageError(module.exports.options.name, msg, args, err)
-      })
+        msg.channel.createMessage(`Movie not found :slight_frown:.`);
+        logger.cmdUsageError(module.exports.options.name, msg, args, err);
+      });
   }
-}
+};

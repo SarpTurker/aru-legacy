@@ -4,8 +4,8 @@
  */
 
 // Setup files and modules
-const axios = require('axios')
-const config = require('../config.json')
+const axios = require('axios');
+const config = require('../config.json');
 
 // Set game status on Discord
 function setStatus (bot, logger) {
@@ -16,20 +16,20 @@ function setStatus (bot, logger) {
         name: config.game_info.game_name,
         type: 1,
         url: config.game_info.stream_url
-      })
+      });
 
       // Log status change
-      logger.info(`Game status set to ${config.game_info.game_name} and stream url set to ${config.game_info.stream_url}`)
+      logger.info(`Game status set to ${config.game_info.game_name} and stream url set to ${config.game_info.stream_url}`);
     } else {
       shard.editStatus({
         name: config.game_info.game_name,
         type: 0
-      })
+      });
 
       // Log status change
-      logger.info(`Game status set to ${config.game_info.game_name}`)
+      logger.info(`Game status set to ${config.game_info.game_name}`);
     }
-  })
+  });
 }
 
 // Post status to Carbonitex and discord.pw
@@ -47,11 +47,11 @@ function postStats (bot, logger) {
       }
     })
       .then(() => {
-        logger.info(`Stats posted to discord.pw`)
+        logger.info(`Stats posted to discord.pw`);
       })
       .catch(err => {
-        logger.error(`FAILURE: Stats not posted to discord.pw ${err}`)
-      })
+        logger.error(`FAILURE: Stats not posted to discord.pw ${err}`);
+      });
   }
 
   if (config.tokens.botlist_sites.carbonitex_key) {
@@ -67,11 +67,11 @@ function postStats (bot, logger) {
       }
     })
       .then(() => {
-        logger.info(`Stats posted to Carbonitex`)
+        logger.info(`Stats posted to Carbonitex`);
       })
       .catch(err => {
-        logger.error(`FAILURE: Stats not posted to Carbonitex ${err}`)
-      })
+        logger.error(`FAILURE: Stats not posted to Carbonitex ${err}`);
+      });
   }
 
   if (config.tokens.botlist_sites.discordbots_key) {
@@ -87,15 +87,15 @@ function postStats (bot, logger) {
       }
     })
       .then(() => {
-        logger.info(`Stats posted to discordbots.org`)
+        logger.info(`Stats posted to discordbots.org`);
       })
       .catch(err => {
-        logger.error(`Stats not posted to discordbots.org ${err}`)
-      })
+        logger.error(`Stats not posted to discordbots.org ${err}`);
+      });
   }
 }
 
 module.exports = {
   setStatus: setStatus,
   postStats: postStats
-}
+};
