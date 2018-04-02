@@ -9,7 +9,7 @@ const guildDocumentManager = require('../db/guildDocumentManager.js');
 
 module.exports = function (bot, logger) {
   // Connect to Database
-  mongoose.connect('mongodb://localhost/aru')
+  mongoose.connect('mongodb://mongo:27017')
     .then(() => {
       logger.info('Database connected');
       // Initalize servers
