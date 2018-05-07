@@ -3,18 +3,18 @@
 	"version": "0.3.3",
 	"description": "A modular Discord bot powered by Eris with miscellaneous functions",
 	"author": "PyroclasticMayhem",
-	"license": "MIT",
-	"main": "bot.js",
+	"license": "AGPL-3.0-or-later",
+	"main": "src/bot.js",
 	"homepage": "https://github.com/perhion/aru",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/perhion/aru"
+		"url": "git+https://github.com/perhion/aru.git"
 	},
 	"bugs": {
 		"url": "https://github.com/perhion/aru/issues"
 	},
 	"scripts": {
-		"start": "node bot.js",
+		"start": "cd src && node bot.js",
 		"lint": "eslint **/*.js --ignore-pattern node_modules/; exit 0"
 	},
 	"keywords": [
@@ -27,27 +27,23 @@
 		"music"
 	],
 	"dependencies": {
+		"akalogger": "^2.0.1",
 		"axios": "^0.18.0",
 		"eris": "^0.8.5",
+		"eris-lavalink": "^1.0.2",
 		"express": "^4.16.3",
-		"ffmpeg-binaries": "^3.2.2-3",
-		"glob": "^7.1.2",
-		"moment": "^2.22.0",
-		"mongoose": "^5.0.12",
-		"node-opus": "^0.2.7",
-		"simple-youtube-api": "^5.0.1",
-		"winston": "^3.0.0-rc3",
-		"ytdl-core": "^0.20.2"
+		"glob-promise": "^3.4.0",
+		"moment": "^2.22.1",
+		"mongoose": "^5.0.17",
+		"uws": "^9.148.0"
 	},
 	"devDependencies": {
-		"ajv": "^6.4.0",
-		"ajv-keywords": "^3.1.0",
 		"eslint": "^4.19.1",
 		"eslint-config-semistandard": "^12.0.1",
-		"eslint-config-standard": "^11.0.0",
-		"eslint-plugin-import": "^2.10.0",
+		"eslint-config-standard": "^12.0.0-alpha.0",
+		"eslint-plugin-import": "^2.11.0",
 		"eslint-plugin-node": "^6.0.1",
 		"eslint-plugin-promise": "^3.7.0",
-		"eslint-plugin-standard": "^3.0.1"
+		"eslint-plugin-standard": "^3.1.0"
 	}
 }
