@@ -1,22 +1,59 @@
 version: '3'
 
 services:
-  app:
-    build: .
+  lavalink:
+    image: fredboat/lavalink:dev
+    container_name: lavalink
     restart: always
-    command: npm start
+    networks:
+      - aru-network
     volumes:
-      - .:/app/
-      - /app/node_modules
-    ports:
-      - "5000:5000"
-    depends_on:
-      - mongo
-    links:
-      - "mongo:mongo"
-  mongo:
+      - aru-db:/data/db
+      - aru-db-dump:/dump
+    expose:
+      - 2333
+      - 8080
+  arudb:
     image: mongo:latest
+    container_name: aru-db
+    restart: always
+    command: mongod --smallfiles
+    networks:
+      - aru-network
     volumes:
-      - ./db:/data/db
+      - aru-db:/data/db
+      - aru-db-dump:/dump
+    expose:
+      - 27017
+  aru:
+    container_name: aru-discord
+    restart: always
+    build: .
+    networks:
+      - aru-network
+    environment:
+      - MONGO_URL=${MONGO_URL}
+      - PREFIX=${PREFIX}
+      - TIME_FORMAT=${TIME_FORMAT}
+      - GAME_NAME=${GAME_NAME}
+      - STREAM_URL=${STREAM_URL}
+      - DISCORD_PW_KEY=${DISCORD_PW_KEY}
+      - CARBONITEX_KEY=${CARBONITEX_KEY}
+      - DISCORDBOTS_KEY=${DISCORDBOTS_KEY}
+      - TMDB_KEY=${TMDB_KEY}
+      - SENTRY_URL=${SENTRY_URL}
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
     ports:
-      - "27017:27017"
+      - ${PORT}:${PORT}
+    depends_on:
+      - arudb
+
+volumes:
+  aru-db:
+    driver: local
+  aru-db-dump:
+    driver: local
+
+networks:
+  aru-network:
+    driver: bridge
