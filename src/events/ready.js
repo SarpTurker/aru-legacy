@@ -26,6 +26,7 @@ const statusManager = require('../utils/statusManager');
 const db = require('../db/db');
 const api = require('../api/api');
 const lavalinkConfig = require('../config/lavalink.json');
+const getBotOwnerID = require('../utils/getBotOwnerID.js');
 
 module.exports = {
   name: 'ready',
@@ -61,5 +62,8 @@ module.exports = {
 
     // Start express server
     api(bot, logger);
+
+    // Set bot owner
+    getBotOwnerID.exec(bot);
   }
 };
