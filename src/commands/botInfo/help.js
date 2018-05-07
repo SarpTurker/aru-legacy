@@ -32,11 +32,13 @@ module.exports = {
       let commands = ''; // Hold command string
 
       for (let command in bot.commands) { // Create field for group
-        commands += `**${process.env.PREFIX}`;
-        commands += bot.commands[command].usage;
-        commands += '** - ';
-        commands += bot.commands[command].description;
-        commands += '\n';
+        if (!bot.commands[command].hidden) { // Print non hidden comamnd
+          commands += `**${process.env.PREFIX}`;
+          commands += bot.commands[command].usage;
+          commands += '** - ';
+          commands += bot.commands[command].description;
+          commands += '\n';
+        }
       }
       commands += `\nRun **${process.env.PREFIX}help <command name>** for more info on a specific command\n`;
 
