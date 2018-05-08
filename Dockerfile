@@ -1,7 +1,5 @@
 FROM node:carbon
 
-ARG PORT=5000
-
 RUN mkdir -p /usr/app
 WORKDIR /usr/app
 
@@ -10,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE $PORT
+EXPOSE 5000
 
 CMD [ "npm", "start" ]

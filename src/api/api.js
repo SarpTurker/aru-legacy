@@ -26,7 +26,5 @@ const app = express();
 module.exports = (bot, logger) => {
   app.get('/', (req, res) => res.send('Hello World!')); // Hello World Test
 
-  if (process.env.API_PORT !== 'false') {
-    app.listen(process.env.API_PORT, () => logger.info(`Listening on port ${process.env.API_PORT}`)); // Listen
-  }
+  app.listen(process.env.API_PORT, () => logger.info(`Listening on port ${process.env.API_PORT}`)); // Listen
 };

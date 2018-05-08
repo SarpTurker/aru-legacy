@@ -5,20 +5,10 @@ services:
     image: mongo:latest
     container_name: aru-db
     restart: always
-    command: mongod --smallfiles
-    networks:
-      - aru-network
-    volumes:
-      - aru-db:/data/db
-      - aru-db-dump:/dump
-    expose:
-      - 27017
   aru:
     container_name: aru-discord
     restart: always
     build: .
-    networks:
-      - aru-network
     environment:
       - MONGO_URL=${MONGO_URL}
       - PREFIX=${PREFIX}
@@ -32,16 +22,8 @@ services:
       - SENTRY_URL=${SENTRY_URL}
       - DISCORD_TOKEN=${DISCORD_TOKEN}
     ports:
-      - ${PORT}:${PORT}
+      - ${API_PORT}:${API_PORT}
     depends_on:
       - arudb
-
-volumes:
-  aru-db:
-    driver: local
-  aru-db-dump:
-    driver: local
-
-networks:
-  aru-network:
-    driver: bridge
+    links:
+      - "arudb:arudb"
