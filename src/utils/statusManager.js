@@ -97,7 +97,7 @@ module.exports = {
         },
         data: {
           'server_count': bot.guilds.size,
-          'shards': bot.shards.size
+          'shard_count': bot.shards.size
         }
       })
         .then(() => {
