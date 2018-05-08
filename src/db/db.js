@@ -25,7 +25,7 @@ const guildDocumentManager = require('../db/guildDocumentManager');
 
 module.exports = (bot, logger) => {
   // Connect to Database
-  mongoose.connect('mongodb://mongo:27017')
+  mongoose.connect(process.env.MONGO_URL)
     .then(() => {
       logger.info('Database connected');
 
