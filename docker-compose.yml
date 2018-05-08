@@ -1,18 +1,6 @@
 version: '3'
 
 services:
-  lavalink:
-    image: fredboat/lavalink:dev
-    container_name: lavalink
-    restart: always
-    networks:
-      - aru-network
-    volumes:
-      - aru-db:/data/db
-      - aru-db-dump:/dump
-    expose:
-      - 2333
-      - 8080
   arudb:
     image: mongo:latest
     container_name: aru-db
