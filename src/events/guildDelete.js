@@ -24,7 +24,7 @@ const statusManager = require('../utils/statusManager');
 const guildDocumentManager = require('../db/guildDocumentManager');
 
 module.exports = {
-  name: 'guildCreate',
+  name: 'guildDelete',
 
   exec: (bot, logger, guild) => {
     statusManager.postStats(bot, logger); // Post stats
