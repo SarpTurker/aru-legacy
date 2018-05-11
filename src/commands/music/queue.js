@@ -36,7 +36,7 @@ module.exports = {
       let queue = '';
 
       for (let i = 0; i < musicUtils.servers[msg.member.guild.id].queue.length; i++) {
-        queue += `**${i + 1}. [${musicUtils.servers[msg.member.guild.id].queue[0].title} by ${musicUtils.servers[msg.member.guild.id].queue[0].author} [${musicUtils.servers[msg.member.guild.id].queue[0].length}]](${musicUtils.servers[msg.member.guild.id].queue[0].url})** requested by **${musicUtils.servers[msg.member.guild.id].queue[0].requester.username}#${musicUtils.servers[msg.member.guild.id].queue[0].requester.discriminator}**\n`; // Print songs in queue
+        queue += `**${i + 1}. [${musicUtils.servers[msg.member.guild.id].queue[i].title} by ${musicUtils.servers[msg.member.guild.id].queue[i].author} [${musicUtils.servers[msg.member.guild.id].queue[i].length}]](${musicUtils.servers[msg.member.guild.id].queue[i].url})** requested by **${musicUtils.servers[msg.member.guild.id].queue[i].requester.username}#${musicUtils.servers[msg.member.guild.id].queue[i].requester.discriminator}**\n`; // Print songs in queue
       }
       msg.channel.createMessage({
         embed: {
