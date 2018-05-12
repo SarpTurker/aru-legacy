@@ -33,7 +33,7 @@ module.exports = {
   exec: (bot, logger, msg, args) => {
     // Make GET request to get url for hug img
     axios
-      .get(`https://nekos.life/api/v2/img/slaps`)
+      .get(`https://nekos.life/api/v2/img/slap`)
       .then(response => {
         if (!msg.mentions.length) { // If user did not mention anyone give them a hug
           // Create message
