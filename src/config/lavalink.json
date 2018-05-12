@@ -1,6 +1,6 @@
 {
   "nodes": [
-    { "host": "localhost", "port": 2335, "region": "us", "password": "youshallnotpass" }
+    { "host": "lavalink", "port": 8090, "region": "us", "password": "youshallnotpass" }
   ],
   "regions": {
     "eu": ["eu", "amsterdam", "frankfurt", "russia", "hongkong", "singapore", "sydney"],

@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  lavalink:
+    image: fredboat/lavalink:master
+    container_name: lavalink
+    restart: always
+    environment:
+      - SERVER_PORT=2333
+      - SERVER_ADDRESS=0.0.0.0
+      - LAVALINK_SERVER_PASSWORD=youshallnotpass
+      - LAVALINK_SERVER_WS_PORT=8090
+      - LAVALINK_SERVER_WS_HOST=0.0.0.0
+      - LAVALINK_SERVER_SOURCES_YOUTUBE=true
+      - LAVALINK_SERVER_SOURCES_BANDCAMP=true
+      - LAVALINK_SERVER_SOURCES_SOUNDCLOUD=true
+      - LAVALINK_SERVER_SOURCES_TWITCH=true
+      - LAVALINK_SERVER_SOURCES_VIMEO=true
+      - LAVALINK_SERVER_SOURCES_MIXER=true
+      - LAVALINK_SERVER_SOURCES_HTTP=true
+      - LAVALINK_SERVER_SOURCES_LOCAL=false
+      - LAVALINK_SERVER_SENTRY_DNS=
+      - LAVALINK_SERVER_BUFFER_DURATION_MS=400
+      - LAVALINK_SERVER_YOUTUBE_PLAYLIST_LOAD_LIMIT=600
+    expose:
+      - 2333
+      - 8090
+  mongo:
+    image: mongo:latest
+    container_name: aru-db
+    restart: always
+    expose:
+      - 27017
+  aru:
+    container_name: aru-discord
+    restart: always
+    build: .
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/aru
+      - PREFIX=a#
+      - TIME_FORMAT=MMMM Do YYYY, h:mm:ss a
+      - GAME_NAME=a#help
+      - STREAM_URL=
+      - DISCORD_PW_KEY=
+      - CARBONITEX_KEY=
+      - DISCORDBOTS_KEY=
+      - TMDB_KEY=
+      - SENTRY_URL=
+      - DISCORD_TOKEN=
+    expose:
+      - 8080
+    depends_on:
+      - lavalink
+      - mongo
