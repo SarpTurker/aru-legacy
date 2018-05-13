@@ -41,22 +41,23 @@ module.exports = {
       .editSelf({
         username: args.join(' ')
       })
+      .then(() => {
+        msg.channel.createMessage({
+          embed: {
+            color: 16765404,
+            title: 'Bot Username Changed',
+            description: `Bot username has been changed to ${args.join(' ')}.`,
+            timestamp: new Date(),
+            footer: {
+              icon_url: bot.user.avatarURL,
+              text: bot.user.username
+            }
+          }
+        });
+      })
       .catch((err) => {
         logger.error(err);
       });
-
-    msg.channel.createMessage({
-      embed: {
-        color: 16765404,
-        title: 'Bot Username Changed',
-        description: `Bot username has been changed to ${args.join(' ')}.`,
-        timestamp: new Date(),
-        footer: {
-          icon_url: bot.user.avatarURL,
-          text: bot.user.username
-        }
-      }
-    });
 
     logger.cmdUsage(module.exports.options.name, msg, args);
   }

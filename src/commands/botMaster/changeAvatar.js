@@ -1,6 +1,6 @@
 /**
  * Aru
- * Change Picture Command
+ * Change Avatar Command
  * Copyright (C) 2018 - Present, PyroclasticMayhem
  *
  * This program is free software: you can redistribute it and/or modify
@@ -25,11 +25,11 @@ const getBotOwnerID = require('../../utils/getBotOwnerID.js');
 
 module.exports = {
   options: {
-    name: 'changepicture',
-    usage: 'changepicture <url>',
+    name: 'changeavatar',
+    usage: 'changeavatar <url>',
     hidden: true,
-    description: 'Change bot picture.',
-    fullDescription: 'Change bot picture.'
+    description: 'Change bot avatar.',
+    fullDescription: 'Change bot avatar.'
   },
 
   exec: async (bot, logger, msg, args) => {
@@ -37,28 +37,35 @@ module.exports = {
       msg.channel.createMessage('Only the botmaster can call this command');
       return;
     }
-
-    let image = await axios.get(msg.attachments[0].url).catch((err) => { logger.error(err); });
-
-    bot
-      .editSelf({
-        avatar: `data:${image.headers['content-type']};base64,${image.data.toString('base64')}`
-      })
-      .then(() => {
-        msg.channel.createMessage({
-          embed: {
-            color: 16765404,
-            title: 'Bot Picture Changed',
-            image: {
-              url: msg.attachments[0] ? msg.attachments[0].url : ''
-            },
-            timestamp: new Date(),
-            footer: {
-              icon_url: bot.user.avatarURL,
-              text: bot.user.username
-            }
-          }
-        });
+    axios({
+      method: 'get',
+      url: msg.attachments[0].url,
+      responseType: 'arraybuffer'
+    })
+      .then((response) => {
+        bot
+          .editSelf({
+            avatar: `data:${response.headers['content-type']};base64,${response.data.toString('base64')}`
+          })
+          .then(() => {
+            msg.channel.createMessage({
+              embed: {
+                color: 16765404,
+                title: 'Bot Picture Changed',
+                image: {
+                  url: msg.attachments[0] ? msg.attachments[0].url : ''
+                },
+                timestamp: new Date(),
+                footer: {
+                  icon_url: bot.user.avatarURL,
+                  text: bot.user.username
+                }
+              }
+            });
+          })
+          .catch((err) => {
+            logger.error(err);
+          });
       })
       .catch((err) => {
         logger.error(err);
