@@ -28,7 +28,8 @@ module.exports = {
   },
 
   exec: (bot, logger, msg, args) => {
-    function createCommandList () {
+    // Function to create command list
+    let createCommandList = () => {
       let commands = ''; // Hold command string
 
       for (let command in bot.commands) { // Create field for group
@@ -43,28 +44,23 @@ module.exports = {
       commands += `\nRun **${process.env.PREFIX}help <command name>** for more info on a specific command\n`;
 
       return commands;
-    }
+    };
 
-    if (args[0] in bot.commands) {
-      if (bot.commands[args[0]]) {
-        msg.channel.createMessage({
-          embed: {
-            color: 16765404,
-            title: bot.commands[args[0]].label,
-            description: `**Usage:** ${bot.commands[args[0]].usage}\n\n**Description:**\n${bot.commands[args[0]].fullDescription}`,
-            timestamp: new Date(),
-            footer: {
-              icon_url: bot.user.avatarURL,
-              text: bot.user.username
-            }
+    if (args[0] in bot.commands) { // Give help specific to command
+      msg.channel.createMessage({
+        embed: {
+          color: 16765404,
+          title: bot.commands[args[0]].label,
+          description: `**Usage:** ${bot.commands[args[0]].usage}\n\n**Description:**\n${bot.commands[args[0]].fullDescription}`,
+          timestamp: new Date(),
+          footer: {
+            icon_url: bot.user.avatarURL,
+            text: bot.user.username
           }
-        });
-        logger.cmdUsage(module.exports.options.name, msg, args);
-      } else {
-        msg.channel.createMessage(`Command not found.`);
-        logger.cmdUsageError(module.exports.options.name, msg, args, 'Command not found');
-      }
-    } else {
+        }
+      });
+      logger.cmdUsage(module.exports.options.name, msg, args);
+    } else { // Give overview of commands
       bot.getDMChannel(msg.author.id)
         .then(channel => {
           channel.createMessage({
@@ -88,7 +84,7 @@ module.exports = {
         })
         .catch(err => {
           bot.createMessage(msg.channel.id, `Could not send help message, check that bot has permission to PM you.`);
-          logger.cmdUsageError(module.exports.options.name, msg, args, err);
+          logger.cmdUsageWarn(module.exports.options.name, msg, args, err);
         });
     }
   }
