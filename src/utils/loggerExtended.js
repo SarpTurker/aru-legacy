@@ -38,4 +38,12 @@ module.exports = class AruLog extends Akalogger {
       this.error(`${cmdName} used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name}#${msg.channel.name} with args ${args}: ${err}`);
     }
   }
+
+  cmdUsageWarn (cmdName, msg, args, err) {
+    if (!msg.channel.guild) {
+      this.warn(`${cmdName} used by ${msg.author.username}#${msg.author.discriminator} in private messages with args ${args}: ${err}`);
+    } else {
+      this.warn(`${cmdName} used by ${msg.author.username}#${msg.author.discriminator} in ${msg.channel.guild.name}#${msg.channel.name} with args ${args}: ${err}`);
+    }
+  }
 };
