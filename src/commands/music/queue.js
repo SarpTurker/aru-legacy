@@ -54,7 +54,7 @@ module.exports = {
       logger.cmdUsage(module.exports.options.name, msg, args);
     } else {
       msg.channel.createMessage('Looks like there is no song in the queue.'); // Notify that there is no song in the queue
-      logger.cmdUsage(module.exports.options.name, msg, args, 'No song in queue');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No song in queue');
     }
   }
 };

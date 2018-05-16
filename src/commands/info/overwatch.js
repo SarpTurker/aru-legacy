@@ -33,13 +33,13 @@ module.exports = {
   exec: function (bot, logger, msg, args) {
     if (args[1] !== 'pc' && args[1] !== 'xbl' && args[1] !== 'psn') {
       msg.channel.createMessage(`Please put in a valid platform: pc, xbl, psn.`);
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'Invalid platform');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Invalid platform');
       return;
     }
 
     if (args[2] !== 'eu' && args[2] !== 'kr' && args[2] !== 'us' && args[2] !== 'global' && args[2] !== 'cn') {
       msg.channel.createMessage(`Please put in a valid region: eu, kr, us, global, cn.`);
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'Invalid region');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Invalid region');
       return;
     }
 

@@ -40,14 +40,14 @@ module.exports = {
   exec: function (bot, logger, msg, args) {
     if (args[0] !== 'join' && args[0] !== 'leave' && args[0] !== 'memberupdate' && args[0] !== 'messagedelete' && args[0] !== 'messageupdate') {
       msg.channel.createMessage(`Please put in a valid type: join, leave, memberupdate, messagedelete, messageupdate.`);
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'Invalid type');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Invalid type');
       return;
     }
 
     if (args[0] === 'join' || args[0] === 'leave') {
       if (!args[1]) {
         msg.channel.createMessage(`Please put in a join message following \`${module.exports.options.name}\`.`);
-        logger.cmdUsageError(module.exports.options.name, msg, args, 'No message');
+        logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No message');
         return;
       }
 

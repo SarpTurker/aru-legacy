@@ -54,8 +54,8 @@ module.exports = {
         logger.cmdUsage(module.exports.options.name, msg, args);
       }
     } else {
-      msg.channel.createMessage('Looks like there is no song to skip'); // Notify that there is no song to skip
-      logger.cmdUsage(module.exports.options.name, msg, args, 'No song to skip');
+      msg.channel.createMessage('Looks like there is no song to skip.'); // Notify that there is no song to skip
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No song to skip');
     }
   }
 };

@@ -34,7 +34,7 @@ module.exports = {
     // Test to make sure user put in args
     if (!args[0]) {
       msg.channel.createMessage(`Please put in a movie name following \`${module.exports.options.name}\`.`);
-      logger.cmdUsageError(module.exports.options.name, msg, args, 'No movie name');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No movie name');
       return;
     }
 

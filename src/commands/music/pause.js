@@ -56,7 +56,7 @@ module.exports = {
         }
       } else {
         msg.channel.createMessage('Looks like there is no song to pause.'); // Notify that there is no song to pause
-        logger.cmdUsage(module.exports.options.name, msg, args, 'No song to pause');
+        logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No song to pause');
       }
     }
     if (args[0] === 'no') {
@@ -80,7 +80,7 @@ module.exports = {
         }
       } else {
         msg.channel.createMessage('Looks like there is no song to unpause.'); // Notify that there is no song to unpause
-        logger.cmdUsage(module.exports.options.name, msg, args, 'No song to unpause');
+        logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No song to unpause');
       }
     }
   }

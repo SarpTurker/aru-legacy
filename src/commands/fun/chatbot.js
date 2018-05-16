@@ -34,7 +34,7 @@ module.exports = {
     // Test to make sure user put in args
     if (!args[0]) {
       msg.channel.createMessage(`Please put in a chat message following \`${module.exports.options.name}\` to chat with the bot.`);
-      logger.cmdUsage(module.exports.options.name, msg, args, 'No chat text');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No chat text');
       return;
     }
 

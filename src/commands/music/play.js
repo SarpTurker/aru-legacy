@@ -36,24 +36,25 @@ module.exports = {
 
     if (!msg.member.voiceState.channelID) { // Test to see if user is not in voice channel
       msg.channel.createMessage('Please join a voice channel before playing a song!');
-      logger.cmdUsage(module.exports.options.name, msg, args, 'Not in voice channel');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Not in voice channel');
       return;
     }
 
     if (!voiceChannel.permissionsOf(bot.user.id).has('voiceConnect')) { // Test to see if bot has permission to join voice channel
       msg.channel.createMessage('Bot does not have the permission to connect to the voice channel.');
-      logger.cmdUsage(module.exports.options.name, msg, args, 'Bot does not have connect permission');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Bot does not have connect permission');
       return;
     }
 
     if (!voiceChannel.permissionsOf(bot.user.id).has('voiceSpeak')) { // Test to see if bot has permission to speak in voice channel
       msg.channel.createMessage('Bot does not have the permission to speak in the voice channel.');
-      logger.cmdUsage(module.exports.options.name, msg, args, 'Bot does not have speak permission');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Bot does not have speak permission');
       return;
     }
+
     if (!args[0]) { // Test to make sure user put in args
       msg.channel.createMessage('Please put in a valid URL after the command or use the search function to find a song.');
-      logger.cmdUsage(module.exports.options.name, msg, args, 'No URL');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No URL');
       return;
     }
 
@@ -65,6 +66,7 @@ module.exports = {
 
     // Build search query
     let searchQuery = 'ytsearch:';
+
     if (args[0] === 'search') {
       for (let i = 1; i < args.length; i++) {
         searchQuery += args[i] + ' ';
@@ -73,6 +75,6 @@ module.exports = {
       searchQuery = args[0];
     }
 
-    musicUtils.getInfo(bot, logger, msg, voiceChannel, searchQuery);
+    musicUtils.getInfo(bot, logger, msg, voiceChannel, searchQuery); // Get info on song
   }
 };
