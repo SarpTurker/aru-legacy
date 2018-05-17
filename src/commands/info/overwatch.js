@@ -30,7 +30,7 @@ module.exports = {
     fullDescription: 'Get information from an Overwatch profile. Information includes level, wins, and playtime.'
   },
 
-  exec: function (bot, logger, msg, args) {
+  exec: (bot, logger, msg, args) => {
     if (args[1] !== 'pc' && args[1] !== 'xbl' && args[1] !== 'psn') {
       msg.channel.createMessage(`Please put in a valid platform: pc, xbl, psn.`);
       logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Invalid platform');
@@ -108,7 +108,7 @@ module.exports = {
       })
       .catch(err => {
         msg.channel.createMessage(`Overwatch profile :slight_frown:`);
-        logger.cmdUsageError(module.exports.options.name, msg, args, err);
+        logger.cmdUsageWarn(module.exports.options.name, msg, args, err);
       });
   }
 };

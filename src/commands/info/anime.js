@@ -30,7 +30,7 @@ module.exports = {
     fullDescription: 'Responds with anime info. Includes episode count, length, airing dates, Kitsu rating, age rating, and synopsis.'
   },
 
-  exec: function (bot, logger, msg, args) {
+  exec: (bot, logger, msg, args) => {
     // Test to make sure user put in args
     if (!args[0]) {
       msg.channel.createMessage(`Please put in a anime name following \`${module.exports.options.name}\`.`);
@@ -108,7 +108,7 @@ module.exports = {
         msg.channel.createMessage(`Anime not found :slight_frown:`);
 
         // Log command usage
-        logger.cmdUsageError(module.exports.options.name, msg, args, err);
+        logger.cmdUsageWarn(module.exports.options.name, msg, args, err);
       });
   }
 };

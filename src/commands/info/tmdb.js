@@ -30,7 +30,7 @@ module.exports = {
     fullDescription: 'Responds with movie info. Includes release date, vote average, status, runtime, genre, production company, runtime, language, plot.'
   },
 
-  exec: function (bot, logger, msg, args) {
+  exec: (bot, logger, msg, args) => {
     // Test to make sure user put in args
     if (!args[0]) {
       msg.channel.createMessage(`Please put in a movie name following \`${module.exports.options.name}\`.`);
@@ -115,12 +115,12 @@ module.exports = {
           })
           .catch(err => {
             msg.channel.createMessage(`An error occured while finding info on movie :slight_frown:.`);
-            logger.cmdUsageError(module.exports.options.name, msg, args, err);
+            logger.cmdUsageWarn(module.exports.options.name, msg, args, err);
           });
       })
       .catch(err => {
         msg.channel.createMessage(`Movie not found :slight_frown:.`);
-        logger.cmdUsageError(module.exports.options.name, msg, args, err);
+        logger.cmdUsageWarn(module.exports.options.name, msg, args, err);
       });
   }
 };

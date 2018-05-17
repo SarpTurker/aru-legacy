@@ -30,7 +30,7 @@ module.exports = {
     fullDescription: 'Responds with manga info. Includes date started, finished, Kitsu rating, age rating, synopsis.'
   },
 
-  exec: function (bot, logger, msg, args) {
+  exec: (bot, logger, msg, args) => {
     // Test to make sure user put in args
     if (!args[0]) {
       msg.channel.createMessage(`Please put in a manga name following \`${module.exports.options.name}\`.`);
@@ -94,7 +94,7 @@ module.exports = {
       })
       .catch(err => {
         msg.channel.createMessage(`Manga not found :slight_frown:`);
-        logger.cmdUsageError(module.exports.options.name, msg, args, err);
+        logger.cmdUsageWarn(module.exports.options.name, msg, args, err);
       });
   }
 };
