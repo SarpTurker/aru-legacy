@@ -37,9 +37,10 @@ module.exports = {
     
     if(musicUtils.servers[msg.member.guild.id]) {
       if(musicUtils.servers[msg.member.guild.id].queue[0]) {
-          if(!args) return 'Number is a required argument!\nUsage: `volume <number>`'
+          if(!args) return 'Please set a number you would like me to set.`'
           if(!Number.isInteger((Number(args)) || isNaN(args))) {
             return 'That doesn\'t look like a number.'
+          }
           if(args > 100) {
             return 'Volume cannot be over 100.'
           }
@@ -49,7 +50,6 @@ module.exports = {
             msg.channel.createMessage(`Volume has been set to ${args}%`)
             player.setVolume(parseInt(args))
           }
-        }
       }
     }    
   }
