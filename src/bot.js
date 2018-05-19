@@ -26,20 +26,6 @@ const glob = require('glob-promise');
 
 // Create new logger
 const logger = new LoggerExtended({
-  levels: {
-    'log': {
-      logToSentry: false
-    },
-    'debug': {
-      logToSentry: false
-    },
-    'info': {
-      logToSentry: false
-    },
-    'warn': {
-      logToSentry: false
-    }
-  },
   file: 'log.log', // File to log to
   raven: {
     url: process.env.SENTRY_URL, // Use Sentry URL from env variable
