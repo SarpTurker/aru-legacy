@@ -33,24 +33,38 @@ module.exports = {
 
   exec: (bot, logger, msg, args) => {
     let voiceChannel = msg.member.guild.channels.get(msg.member.voiceState.channelID);
-    let player = musicUtils.getPlayer(bot, voiceChannel);
-    
-    if(musicUtils.servers[msg.member.guild.id]) {
-      if(musicUtils.servers[msg.member.guild.id].queue[0]) {
-          if(!args) return 'Please set a number you would like me to set.`'
-          if(!Number.isInteger((Number(args)) || isNaN(args))) {
-            return 'That doesn\'t look like a number.'
+    let player = musicUtils.getPlayer(bot, logger, voiceChannel);
+
+    if (musicUtils.servers[msg.member.guild.id] && musicUtils.servers[msg.member.guild.id].queue[0]) { // Test to see if bot is in a connection and that there is a song
+      if (!args) {
+        msg.channel.createMessage('Please set a number you would like me to set.');
+        return logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No args');
+      } else if (!Number.isInteger((Number(args)) || isNaN(args))) {
+        msg.channel.createMessage('Please enter a number.');
+        return logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Args not a number');
+      } else if (args > 100) {
+        msg.channel.createMessage('Volume cannot be over 100.');
+        return logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Volume over 100');
+      } else if (args < 4) {
+        msg.channel.createMessage('Volume cannot be below 4.');
+        return logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Volume below 4');
+      } else {
+        msg.channel.createMessage({
+          embed: {
+            color: 16765404,
+            title: '🎵 Volume Changed',
+            description: `Volume has been set to ${args}%`,
+            timestamp: new Date(),
+            footer: {
+              icon_url: bot.user.avatarURL,
+              text: bot.user.username
+            }
           }
-          if(args > 100) {
-            return 'Volume cannot be over 100.'
-          }
-          if(args < 4) {
-            return 'Volume cannot be below 4.'
-          } else {
-            msg.channel.createMessage(`Volume has been set to ${args}%`)
-            player.setVolume(parseInt(args))
-          }
+        });
+
+        logger.cmdUsage(module.exports.options.name, msg, args);
+        player.setVolume(parseInt(args));
       }
-    }    
+    }
   }
 };
