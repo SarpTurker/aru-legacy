@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"start": "cd src && node bot.js",
-		"lint": "eslint src/*; exit 0"
+		"lint": "eslint src/*"
 	},
 	"keywords": [
 		"discord",
