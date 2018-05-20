@@ -35,24 +35,22 @@ module.exports = {
     let voiceChannel = msg.member.guild.channels.get(msg.member.voiceState.channelID);
     let player = musicUtils.getPlayer(bot, logger, voiceChannel);
 
-    if (musicUtils.servers[msg.member.guild.id]) { // Test to see if bot is in a connection
-      if (musicUtils.servers[msg.member.guild.id].queue[0]) {
-        msg.channel.createMessage({
-          embed: {
-            color: 16765404,
-            title: '🎵 Skip',
-            description: `Now skipping **[${musicUtils.servers[msg.member.guild.id].queue[0].title} by ${musicUtils.servers[msg.member.guild.id].queue[0].author} [${musicUtils.servers[msg.member.guild.id].queue[0].length}]](${musicUtils.servers[msg.member.guild.id].queue[0].url})** requested by **${musicUtils.servers[msg.member.guild.id].queue[0].requester.username}#${musicUtils.servers[msg.member.guild.id].queue[0].requester.discriminator}**`,
-            timestamp: new Date(),
-            footer: {
-              icon_url: bot.user.avatarURL,
-              text: bot.user.username
-            }
+    if (musicUtils.servers[msg.member.guild.id] && musicUtils.servers[msg.member.guild.id].queue[0]) { // Test to see if bot is in a connection
+      msg.channel.createMessage({
+        embed: {
+          color: 16765404,
+          title: '🎵 Skip',
+          description: `Now skipping **[${musicUtils.servers[msg.member.guild.id].queue[0].title} by ${musicUtils.servers[msg.member.guild.id].queue[0].author} [${musicUtils.servers[msg.member.guild.id].queue[0].length}]](${musicUtils.servers[msg.member.guild.id].queue[0].url})** requested by **${musicUtils.servers[msg.member.guild.id].queue[0].requester.username}#${musicUtils.servers[msg.member.guild.id].queue[0].requester.discriminator}**`,
+          timestamp: new Date(),
+          footer: {
+            icon_url: bot.user.avatarURL,
+            text: bot.user.username
           }
-        });
+        }
+      });
 
-        player.stop(); // Stop playing the song
-        logger.cmdUsage(module.exports.options.name, msg, args);
-      }
+      player.stop(); // Stop playing the song
+      logger.cmdUsage(module.exports.options.name, msg, args);
     } else {
       msg.channel.createMessage('Looks like there is no song to skip.'); // Notify that there is no song to skip
       logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No song to skip');

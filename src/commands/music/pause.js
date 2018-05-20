@@ -36,48 +36,44 @@ module.exports = {
     let player = musicUtils.getPlayer(bot, logger, voiceChannel);
 
     if (args[0] === 'yes') {
-      if (musicUtils.servers[msg.member.guild.id]) { // Test to see if bot is in a connection
-        if (musicUtils.servers[msg.member.guild.id].queue[0]) {
-          msg.channel.createMessage({
-            embed: {
-              color: 16765404,
-              title: '🎵 Pausing',
-              description: `Music bot is now pausing.`,
-              timestamp: new Date(),
-              footer: {
-                icon_url: bot.user.avatarURL,
-                text: bot.user.username
-              }
+      if (musicUtils.servers[msg.member.guild.id] && musicUtils.servers[msg.member.guild.id].queue[0]) { // Test to see if bot is in a connection
+        msg.channel.createMessage({
+          embed: {
+            color: 16765404,
+            title: '🎵 Pausing',
+            description: `Music bot is now pausing.`,
+            timestamp: new Date(),
+            footer: {
+              icon_url: bot.user.avatarURL,
+              text: bot.user.username
             }
-          });
+          }
+        });
 
-          player.setPause(true); // Pause the song
-          logger.cmdUsage(module.exports.options.name, msg, args);
-        }
+        player.setPause(true); // Pause the song
+        logger.cmdUsage(module.exports.options.name, msg, args);
       } else {
         msg.channel.createMessage('Looks like there is no song to pause.'); // Notify that there is no song to pause
         logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No song to pause');
       }
     }
     if (args[0] === 'no') {
-      if (musicUtils.servers[msg.member.guild.id]) { // Test to see if bot is in a connection
-        if (musicUtils.servers[msg.member.guild.id].queue[0]) {
-          msg.channel.createMessage({
-            embed: {
-              color: 16765404,
-              title: '🎵 Unpausing',
-              description: `Music bot is now unpausing.`,
-              timestamp: new Date(),
-              footer: {
-                icon_url: bot.user.avatarURL,
-                text: bot.user.username
-              }
+      if (musicUtils.servers[msg.member.guild.id] && musicUtils.servers[msg.member.guild.id].queue[0]) { // Test to see if bot is in a connection
+        msg.channel.createMessage({
+          embed: {
+            color: 16765404,
+            title: '🎵 Unpausing',
+            description: `Music bot is now unpausing.`,
+            timestamp: new Date(),
+            footer: {
+              icon_url: bot.user.avatarURL,
+              text: bot.user.username
             }
-          });
+          }
+        });
 
-          player.setPause(false); // Unpause the song
-          logger.cmdUsage(module.exports.options.name, msg, args);
-        }
+        player.setPause(false); // Unpause the song
+        logger.cmdUsage(module.exports.options.name, msg, args);
       } else {
         msg.channel.createMessage('Looks like there is no song to unpause.'); // Notify that there is no song to unpause
         logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No song to unpause');

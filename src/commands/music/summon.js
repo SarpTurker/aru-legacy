@@ -35,24 +35,22 @@ module.exports = {
     let voiceChannel = msg.member.guild.channels.get(msg.member.voiceState.channelID);
     let player = musicUtils.getPlayer(bot, logger, voiceChannel);
 
-    if (musicUtils.servers[msg.member.guild.id]) { // Test to see if bot is in a connection
-      if (musicUtils.servers[msg.member.guild.id].queue[0]) {
-        msg.channel.createMessage({
-          embed: {
-            color: 16765404,
-            title: '🎵 Moving channels',
-            description: `Moving bot to **${voiceChannel.name}**`,
-            timestamp: new Date(),
-            footer: {
-              icon_url: bot.user.avatarURL,
-              text: bot.user.username
-            }
+    if (musicUtils.servers[msg.member.guild.id] && musicUtils.servers[msg.member.guild.id].queue[0]) { // Test to see if bot is in a connection
+      msg.channel.createMessage({
+        embed: {
+          color: 16765404,
+          title: '🎵 Moving channels',
+          description: `Moving bot to **${voiceChannel.name}**`,
+          timestamp: new Date(),
+          footer: {
+            icon_url: bot.user.avatarURL,
+            text: bot.user.username
           }
-        });
+        }
+      });
 
-        player.switchChannel(voiceChannel.id, true); // Switch channels
-        logger.cmdUsage(module.exports.options.name, msg, args);
-      }
+      player.switchChannel(voiceChannel.id, true); // Switch channels
+      logger.cmdUsage(module.exports.options.name, msg, args);
     } else {
       msg.channel.createMessage('Looks like there is no channel the bot can be moved to.'); // Notify that there is no song to skip
       logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No channel to move bot to.');
