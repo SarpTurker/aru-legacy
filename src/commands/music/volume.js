@@ -33,6 +33,13 @@ module.exports = {
 
   exec: (bot, logger, msg, args) => {
     let voiceChannel = msg.member.guild.channels.get(msg.member.voiceState.channelID);
+
+    if (!msg.member.voiceState.channelID) { // Test to see if user is not in voice channel
+      msg.channel.createMessage('Please join a voice channel before setting volume!');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Not in voice channel');
+      return;
+    }
+
     let player = musicUtils.getPlayer(bot, logger, voiceChannel);
 
     if (musicUtils.servers[msg.member.guild.id] && musicUtils.servers[msg.member.guild.id].queue[0]) { // Test to see if bot is in a connection and that there is a song

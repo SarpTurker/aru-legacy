@@ -33,6 +33,13 @@ module.exports = {
 
   exec: (bot, logger, msg, args) => {
     let voiceChannel = msg.member.guild.channels.get(msg.member.voiceState.channelID);
+
+    if (!msg.member.voiceState.channelID) { // Test to see if user is not in voice channel
+      msg.channel.createMessage('Please join a voice channel before pausing!');
+      logger.cmdUsageWarn(module.exports.options.name, msg, args, 'Not in voice channel');
+      return;
+    }
+
     let player = musicUtils.getPlayer(bot, logger, voiceChannel);
 
     if (args[0] === 'yes') {
@@ -56,8 +63,7 @@ module.exports = {
         msg.channel.createMessage('Looks like there is no song to pause.'); // Notify that there is no song to pause
         logger.cmdUsageWarn(module.exports.options.name, msg, args, 'No song to pause');
       }
-    }
-    if (args[0] === 'no') {
+    } else if (args[0] === 'no') {
       if (musicUtils.servers[msg.member.guild.id] && musicUtils.servers[msg.member.guild.id].queue[0]) { // Test to see if bot is in a connection
         msg.channel.createMessage({
           embed: {
