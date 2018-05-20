@@ -26,8 +26,8 @@ module.exports = {
   options: {
     name: 'summon',
     usage: 'summon',
-    description: 'Skip currently playing song',
-    fullDescription: 'Skip currently playing song.',
+    description: 'Make the bot move channels.', 
+    fullDescription: 'Make the bot move channels.',
     guildOnly: true
   },
 
