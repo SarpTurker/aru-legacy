@@ -3,7 +3,7 @@
 </p>
 
 # Aru
-[![Discord](https://img.shields.io/discord/102860784329052160.svg?style=flat-square)](https://discord.gg/0qAx3KUU1I4X74Hc)
+[![Discord](https://img.shields.io/discord/150660709254955009.svg?style=flat-square)](https://discord.gg/0qAx3KUU1I4X74Hc)
 [![JS Semistandard Style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
 [![David](https://img.shields.io/david/perhion/aru.svg?style=flat-square)](https://david-dm.org/perhion/aru)
 [![Travis](https://img.shields.io/travis/perhion/aru.svg?style=flat-square)](https://travis-ci.org/perhion/aru)
