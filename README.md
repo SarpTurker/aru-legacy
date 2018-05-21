@@ -3,10 +3,11 @@
 </p>
 
 # Aru
-[![Aru Support Server](https://discordapp.com/api/guilds/150660709254955009/embed.png?style=shield)](https://discord.gg/0qAx3KUU1I4X74Hc)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6b36f823103340bbb11ec623d4162fa6)](https://www.codacy.com/app/PyroclasticMayhem/aru?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=perhion/aru&amp;utm_campaign=Badge_Grade)
-[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
-[![David](https://david-dm.org/perhion/aru.svg)](https://david-dm.org/perhion/aru)
+[![Discord](https://img.shields.io/discord/102860784329052160.svg?style=flat-square)](https://discord.gg/0qAx3KUU1I4X74Hc)
+[![JS Semistandard Style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
+[![David](https://img.shields.io/david/perhion/aru.svg?style=flat-square)](https://david-dm.org/perhion/aru)
+[![Travis](https://img.shields.io/travis/perhion/aru.svg?style=flat-square)](https://travis-ci.org/perhion/aru)
+[![Docker Build Status](https://img.shields.io/docker/build/perhion/aru.svg?style=flat-square)](https://hub.docker.com/r/perhion/aru/)
 
 Aru is a modular Discord bot powered by Eris with miscellaneous functions.
 
